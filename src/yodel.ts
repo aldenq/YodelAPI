@@ -8,6 +8,7 @@ import { Format } from "./format"
  * A function meant to deal with a raw MessageEvent
  */
 type RawMessageHandler = (data:MessageEvent)=>void;
+
 /**
  * A function meant to deal with a Section
  */
@@ -89,14 +90,22 @@ export class YodelSocket{
      */
     channel: number;
 
-
+    /**
+     * Message Handlers
+     */
     onmessageRaw : RawMessageHandler | null = null;
     onmessageSection : SectionHandler | null = null;
-
+    /**
+     * WebSocket connected to given server
+     */
     private directSock:WebSocket;
     private messageStack: Array<YodelMessage> = [];
     
-    
+    /**
+     * Construct a new YodelSocket
+     * @param hostip The IP address (including port) of the server
+     * @param name The name for 'this' robot (optional)
+     */
     constructor(hostip:string, name:string = ""){
 
         this.hostip = hostip;
@@ -115,7 +124,12 @@ export class YodelSocket{
         
 
     }
-
+    /**
+     * Send a message through the yodel API
+     * @param payload The main content of your message
+     * @param outName The name you are sending to
+     * @param outGroup The group you are sending to
+     */
     send(payload:Object, outName:string = "", outGroup:string = ""): void{
         this.sendRawMessage(
             new YodelMessage(
@@ -128,11 +142,16 @@ export class YodelSocket{
             )
         );
     }
-
+    /**
+     * Listen for an incoming yodel message
+     */
     listen(){
         
     }
-
+    /**
+     * Add this robot to a new group
+     * @param newgroup new group to join
+     */
     addGroup(newgroup:string):void{
         this.sendRawMessage(new YodelMessage(
             "addGroup",{

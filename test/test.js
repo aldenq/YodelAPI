@@ -1,1 +1,1 @@
-var socket = new yodel.YodelSocket("ws://192.168.0.78:5500", "name");
+var socket = new yodel.YodelSocket("ws://localhost:5560", "name");
