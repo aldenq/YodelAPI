@@ -124,13 +124,28 @@ export class YodelSocket{
         
 
     }
+
+    setOnConnect(fn:()=>any):void{
+        this.directSock.onopen=fn;
+    }
+
+
     /**
      * Send a message through the yodel API
      * @param payload The main content of your message
      * @param outName The name you are sending to
      * @param outGroup The group you are sending to
      */
-    send(payload:Object, outName:string = "", outGroup:string = ""): void{
+    send(payload:string|Section|Blob, outName:string = "", outGroup:string = ""): void{
+        
+        if (payload instanceof Section){
+            payload = payload.stringify()
+        }else if (payload instanceof Blob){
+            payload.text().then(function(result:string){
+                payload = result;
+            })
+        }
+        
         this.sendRawMessage(
             new YodelMessage(
                 "send", {
@@ -158,6 +173,15 @@ export class YodelSocket{
                 "group":newgroup
                 }
             ));
+    }
+
+    setName(newname:string):void{
+        this.name=newname;
+        this.sendRawMessage(new YodelMessage(
+            "setName", {
+                "name":newname
+            }
+        ));
     }
 
     private sendRawMessage(msg:YodelMessage){
