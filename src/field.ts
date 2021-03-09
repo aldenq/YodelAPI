@@ -1,11 +1,11 @@
 import { InvalidFieldArgs } from "./errors";
 
-export const enum FieldType{
+export class FieldType{
 
-    int,
-    str,
-    bytearray,
-    flags
+    static int:number = 0;
+    static str:number = 1;
+    static bytearray:number = 2;
+    static flags:number = 3;
 
 };
 
@@ -31,6 +31,10 @@ export class Field{
         }
         
 
+    }
+
+    stringify(){
+        return JSON.stringify(this)
     }
 
 };

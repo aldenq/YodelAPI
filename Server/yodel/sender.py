@@ -17,6 +17,7 @@ from yodel.config import *
 
 
 #####setup for communication with sender thread
+#print("init")
 globaldat.sender_pipe, sender_pipe_output = mp.Pipe() 
 globaldat.outgoing = mp.Queue()
 #####
@@ -40,7 +41,7 @@ def setting_update(setting,value):
         print("exit sender")
         exiting = True
         #exist_start = 
-        #sys.exit()
+        sys.exit()
 
 
 
@@ -54,7 +55,7 @@ def sendData(packet, current_iface, repeats):
     src = b'\x08\x00\x27\x8e\x75\x44'  #random hex stream, could be used as additional space of bits
     dst = b'\xff\xff\xff\xff\xff\xff'  # broadcast address is used to stop certain drivers retransmitting frames
     bssid = src
-    sn = (random.randint(0, 4096)) #semi unique id, annoyingly not usable due to lack of bits for this application. 
+    sn = (random.randint(0, 4096)) #semi unique id, annoyingly not usable due to lack of bits for this application.  -----fix this -----
     sn = sn << 4
     seq = sn.to_bytes(4, 'little')
     header80211 = ftype + dur + dst + src + bssid + seq
@@ -62,22 +63,22 @@ def sendData(packet, current_iface, repeats):
     ##########
 
     data = globaldat.radiotap + header80211 + b"\x72\x6f\x62\x6f\x74"+packet #attach radiotap headers, 80211 headers and yodel payload 
-    print("sending...")
+    #print("sending...")
     for i in range(repeats): #re-transmmit message a couple times
         globaldat.s.send(data) #send the data
 
 
 
-def send(payload, **kwargs):
+def send(payload,name:str = "",group:str =""):
     global outgoing,outgoing_data
 
-    name = kwargs.get("name", '')    #receiver name
-    group = kwargs.get("group", '')  #receiver group
+    #name = kwargs.get("name", '')    #receiver name
+    #group = kwargs.get("group", '')  #receiver group
     mtype = 0#kwargs.get("type", '')   #message type
   
     if type(payload) == Section: #if type is a section than it can be processed automatically 
         mtype = payload.format.mtype
-        print(mtype)
+        #print(mtype)
         payload= bytes(payload)
         
     if name: #check for a provided receiver name otherwise make it blank
@@ -106,7 +107,7 @@ def send(payload, **kwargs):
     oframe.repeats=globaldat.totalsends
     #print(__name__ == )
     #outgoing_data.print()
-    print("sending3")
+    #print("sending3")
     globaldat.outgoing.put(oframe)
     # sendData(fframe,iface,totalsends)
 
@@ -121,10 +122,10 @@ def sender(outgoing,pipe): #thread that manages sending out data
             settings = pipe.recv() #if there are any then receive them
             setting_update(settings[0],settings[1]) #use these as inputs to the settings update function
         
-        print("waiting...")
+        #print("waiting...")
         
         frame = outgoing.get() #wait for data in stack to be sent (is blocking)
-        print("found")
+        #print("found")
         reps = frame.repeats
         dat = frame.bytes
         sendData(dat, globaldat.iface, reps)

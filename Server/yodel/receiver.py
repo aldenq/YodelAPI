@@ -31,6 +31,7 @@ globaldat.receiver_pipe, receiver_pipe_output = mp.Pipe()
 def is_recipient(data,rlen):  #check to see if a given message is intended for this computer, either to receive or to relay
     
     # print(lastMessages)
+    
     frame = data[rlen+26+5:] #get data frame payload section
     pos = 0 #pos is used as a pointer to the current section of the header being decoded
     #ftype = frame[pos:pos+1]
@@ -70,7 +71,7 @@ def is_recipient(data,rlen):  #check to see if a given message is intended for t
         #if globaldat.relay == True and not (name == globaldat.robotName):
         #    relay = True
 
-        
+        #print(nameM,groupM,name,group,globaldat.groups)
         relay = (globaldat.relay == True and not (name == globaldat.robotName))
             #relayFrame(frame)
         return(nameM and groupM,relay)
@@ -92,6 +93,7 @@ def setting_update(setting,value): #settings handlers for handeling setting chan
     if setting == "name":
         globaldat.robotName = value
     elif setting == "add_group":
+        print("groups",value)
         globaldat.groups.append(value)
     elif setting == "del_group":
         deleteGroup(value)
@@ -112,7 +114,7 @@ def relayFrame(frame):
 
 
 
-def listenrecv():
+def listenrecv(pipe):
    
     
     try:
@@ -136,14 +138,16 @@ def listenrecv():
     starth = (payload[pos:pos + 5])
 
     if starth == b"\x72\x6f\x62\x6f\x74":  # radio tap headers are stripped on external frames (non loopback)
+        #print("check")
+        settings_check(pipe) #additionally check for settings change if any yodel data is captured to see if anything important has changed
         rdata = is_recipient(data,radiolen)
-
+        #print("a")
         if rdata:
             isr,dorelay = rdata
             if dorelay:
                 relayFrame(payload[5:]) #16+5
             if isr:
-               
+                #print(payload)
                 return(payload[5:])    
         
     return(None)
@@ -153,6 +157,11 @@ def listenrecv():
 
 
 
+def settings_check(pipe):
+    if pipe.poll(0): #check for new data in pipe
+            settings = pipe.recv() #get data
+            #print(settings,"setting update")
+            setting_update(settings[0],settings[1]) #change settings accordingly 
 
 
 
@@ -169,19 +178,20 @@ def listen():
         return(None)
 
 def receiver(incoming,pipe):
-    #global incoming
-    #print(__name__,"receiver")
+    """
+    this is the main function in the reciever thread. this checks for new messages and stores them into the stack so that main thread can access them
+    this also checks for settings updates and acts on them
+
+
+    """
     globaldat.s.settimeout(.1)
     while True:
+        #print("new")
         
-        if pipe.poll(0):
-            settings = pipe.recv()
-            setting_update(settings[0],settings[1])
-
-
-        dat = listenrecv()
+        settings_check(pipe) #check for settings updates
+        dat = listenrecv(pipe)
         
-        #print(dat)
+        
         if dat != None:
             formatted = FrameRecv(dat)
             

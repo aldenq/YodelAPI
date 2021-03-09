@@ -1,7 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Field = void 0;
+exports.Field = exports.FieldType = void 0;
 var errors_1 = require("./errors");
+var FieldType = /** @class */ (function () {
+    function FieldType() {
+    }
+    FieldType.int = 0;
+    FieldType.str = 1;
+    FieldType.bytearray = 2;
+    FieldType.flags = 3;
+    return FieldType;
+}());
+exports.FieldType = FieldType;
 ;
 var Field = /** @class */ (function () {
     function Field(name, type, bytes, min, max, args) {
@@ -21,10 +31,13 @@ var Field = /** @class */ (function () {
         if (bytes + min + max == 0) {
             throw new errors_1.InvalidFieldArgs(true);
         }
-        else if (args.length > 0 && type != 3 /* flags */) {
+        else if (args.length > 0 && type != FieldType.flags) {
             throw new errors_1.InvalidFieldArgs(false);
         }
     }
+    Field.prototype.stringify = function () {
+        return JSON.stringify(this);
+    };
     return Field;
 }());
 exports.Field = Field;

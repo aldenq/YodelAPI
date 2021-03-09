@@ -6,10 +6,23 @@ yodel.startRadio(
 yodel.setChannel(5)
 yodel.setName("YodelEcho")
 yodel.addGroup("b")
+
+ft = yodel.Format([yodel.Field("stringval", str, bytes=100)], mtype=5)
+s = yodel.Section(ft)
+
 while True:
 
     data = yodel.listen()
     if data:
         print("Echo Recv:", data)
+        
+        data = yodel.autoDecode(data)
+        if isinstance(data, bytes):
+            yodel.send(data.decode(), name="YodelTest", group="a")
+        else:
+            news = yodel.Section(ft)
+            for field in news.fields:
+                news[field] = data[field]
+            print(news)
+            yodel.send(news, name="YodelTest", group="a")
         time.sleep(0.1)
-        yodel.send(data.payload, name="YodelTest", group="a")

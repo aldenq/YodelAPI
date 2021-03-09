@@ -5,11 +5,6 @@ import { Section } from "./section"
 import { Format } from "./format"
 
 /**
- * A function meant to deal with a raw MessageEvent
- */
-type RawMessageHandler = (data:MessageEvent)=>void;
-
-/**
  * A function meant to deal with a Section
  */
 type SectionHandler = (data:Section)=>void;
@@ -20,15 +15,22 @@ type SectionHandler = (data:Section)=>void;
  * @param event MessageEvent containing raw data
  */
 function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
+    console.log(event.data)
+    let section:Section;
+    let data = JSON.parse(event.data);
 
-    if ( ysock.onmessageRaw != null){
-        ysock.onmessageRaw(event);
+    if ("string" in data.kwargs){
+        section = new Section(new Format([], 0),{"":data.kwargs.string}, data.kwargs.string);
     }else{
+        section = new Section(new Format(data.kwargs.fields,data.kwargs.number),data.kwargs.fields,data.kwargs.payload)
+    }
+    
 
-        let content = event.data;
-        console.log(content);
 
-
+    if ( ysock.onmessage != null){
+        ysock.onmessage(section);
+    }else{
+        ysock.messageStack.push(section);
     }
 
 }
@@ -91,15 +93,14 @@ export class YodelSocket{
     channel: number;
 
     /**
-     * Message Handlers
+     * Message Handler
      */
-    onmessageRaw : RawMessageHandler | null = null;
-    onmessageSection : SectionHandler | null = null;
+    onmessage : SectionHandler | null = null;
     /**
      * WebSocket connected to given server
      */
     private directSock:WebSocket;
-    private messageStack: Array<YodelMessage> = [];
+    messageStack: Array<Section> = [];
     
     /**
      * Construct a new YodelSocket
@@ -129,6 +130,11 @@ export class YodelSocket{
         this.directSock.onopen=fn;
     }
 
+    private sendNewFormat(fmt:Format){
+        this.sendRawMessage(new YodelMessage(
+            "createFormat", fmt
+        ));
+    }
 
     /**
      * Send a message through the yodel API
@@ -137,9 +143,12 @@ export class YodelSocket{
      * @param outGroup The group you are sending to
      */
     send(payload:string|Section|Blob, outName:string = "", outGroup:string = ""): void{
-        
+        let sendType = "Basic";
         if (payload instanceof Section){
-            payload = payload.stringify()
+            
+            sendType = "Section";
+            this.sendNewFormat(payload.format);
+        
         }else if (payload instanceof Blob){
             payload.text().then(function(result:string){
                 payload = result;
@@ -148,7 +157,7 @@ export class YodelSocket{
         
         this.sendRawMessage(
             new YodelMessage(
-                "send", {
+                "send"+sendType, {
                     "payload":payload,
                     "name":outName,
                     "group": outGroup,

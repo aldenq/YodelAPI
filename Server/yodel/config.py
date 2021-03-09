@@ -5,8 +5,9 @@ import subprocess
 import yodel.globaldat as globaldat
 
 def send_to_receiver(data): #some settings changes require data to be sent to a thread this function takes care of that
+    print("sending to r")
     globaldat.receiver_pipe.send(data)
-
+    print("done")
 
 def send_to_sender(data): #some settings changes require data to be sent to a thread this function takes care of that
     globaldat.sender_pipe.send(data)
@@ -43,7 +44,7 @@ def addGroup(group):
     globaldat.groups.append(group)
     send_to_receiver(["add_group",group])
     send_to_sender(["add_group",group])
-    
+
 def deleteGroup(group):
     global groups
     if group in groups:
@@ -53,7 +54,7 @@ def deleteGroup(group):
     send_to_sender(["del_group",group])
 
 def getGroups():
-    return (groups)
+    return (globaldat.groups)
 
 
 def clearGroups():
@@ -76,6 +77,7 @@ def setChannel(channel):  # set the channel for the interface, some drivers only
 
 
 def setPower(txdBm):
+    #3500 is not necessarily a legal or safe power level for your hardware, the limiter is just to marginally decrease the odds of causing problems. 
     if txdBm > 3500:
         txdBm = 3500
         print("power level is set too high")
