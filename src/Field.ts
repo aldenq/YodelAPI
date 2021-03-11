@@ -1,4 +1,4 @@
-import { InvalidFieldArgs } from "./errors";
+import { InvalidFieldArgs } from "./Errors";
 /**
  * FieldType is an enumeration of normal python types.
  */

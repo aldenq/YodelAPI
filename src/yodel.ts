@@ -10,11 +10,12 @@
  * 
  */
 
-import { bitCount, bytesToRepresent } from "./utilities"
-import { InvalidFieldArgs, UnkownGroup } from "./errors"
-import { FieldType, Field } from "./field"
-import { Section } from "./section"
-import { Format } from "./format"
+
+import { bitCount, bytesToRepresent } from "./Utilities"
+import { InvalidFieldArgs, UnkownGroup } from "./Errors"
+import { FieldType, Field } from "./Field"
+import { Section } from "./Section"
+import { Format } from "./Format"
 
 /**
  * A function meant to deal with a Section
@@ -286,7 +287,7 @@ export class YodelSocket{
 
 
 
-export { InvalidFieldArgs, UnkownGroup } from "./errors"
-export { FieldType, Field } from "./field"
-export { Section } from "./section"
-export { Format } from "./format"
+export { InvalidFieldArgs, UnkownGroup } from "./Errors"
+export { FieldType, Field } from "./Field"
+export { Section } from "./Section"
+export { Format } from "./Format"

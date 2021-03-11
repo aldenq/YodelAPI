@@ -1,4 +1,4 @@
-import { Field, FieldType } from "./field"
+import { Field, FieldType } from "./Field"
 
 /**
  * A Format object is used to classify a new type of message that will be sent over yodel.

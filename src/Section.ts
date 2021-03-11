@@ -1,5 +1,5 @@
-import { Field } from "./field";
-import {Format} from "./format"
+import { Field } from "./Field";
+import {Format} from "./Format"
 /**
  * A Section object is used to encode values organized by {@linkcode Field} objects within
  * a {@linkcode Format} object. A single {@linkcode Format} encodes mulpiple 

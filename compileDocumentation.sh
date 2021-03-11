@@ -1,1 +1,1 @@
-typedoc --out docs ./src/yodel.ts
+typedoc --out docs --excludeInternal  --exclude "./src/Utilities.ts" ./src/
