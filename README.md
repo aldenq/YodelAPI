@@ -1,4 +1,4 @@
-#Documentation: https://aldenq.github.io/YodelAPI/
+# Documentation: https://aldenq.github.io/YodelAPI/
 
 # YodelAPI
 API for connecting websites with robots using [yodel](https://github.com/aldenq/Yodel).
