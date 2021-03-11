@@ -26,7 +26,7 @@ socket.send(sect, name="YodelEcho", group="b");
 socket.onmessage = function(msg){
 
     console.log(msg);
-    console.log(msg.getField("stringval"));
+    console.log(msg.stringval);
     console.log(msg.payload);
 
 }

@@ -1,3 +1,15 @@
+/**
+ * @module
+ * @description
+ * The Yodel API provides a way to communicate with the yodel standard through
+ * a server. 
+ * For more information about yodel see the [Yodel Github](https://github.com/aldenq/Yodel)
+ * 
+ * @author Philo Kaulkin        {@link https://www.github.com/Phil0nator | Github}
+ * @author Alden Quigley        {@link https://www.github.com/aldenq | Github}
+ * 
+ */
+
 import { bitCount, bytesToRepresent } from "./utilities"
 import { InvalidFieldArgs } from "./errors"
 import { FieldType, Field } from "./field"
@@ -39,6 +51,7 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
  * YodelMessage is a structure for the JSON sent between the client and server.
  * A message has an action, (What either the client or the server should do), and some 
  * keword arguments.
+ * @internal
  */
 class YodelMessage{
     /**
@@ -79,7 +92,8 @@ class YodelMessage{
  */
 export class YodelSocket{
     /**
-     * The IP address of the host
+     * The IP address of the host (using websocket format)
+     * e.g: "ws://127.0.0.1:5560"
      */
     hostip:string;
     /**
@@ -99,6 +113,7 @@ export class YodelSocket{
      * WebSocket connected to given server
      */
     private directSock:WebSocket;
+    /**@private*/
     messageStack: Array<Section> = [];
     
     /**
@@ -125,8 +140,39 @@ export class YodelSocket{
 
     }
 
+
+    /**
+     * This function will block until this YodelSocket has an open connection to
+     * the YodelAPI server. If you want to use the more event driven structure,
+     * use {@linkcode YodelSocket.setOnConnect} 
+     */
+    awaitConnection():void {
+        let thisref = this;
+        setTimeout(
+            function () {
+                if (thisref.directSock.readyState != WebSocket.OPEN){
+                    thisref.awaitConnection()
+                }
+            }, 10
+        );
+
+    }
+
+    /**
+     * Set a callback for when the YodelSocket is able to connect.
+     * If you want to use the more syncronous structure, use {@linkcode YodelSocket.awaitConnection}.
+     * @param fn A callback function that will be fired when the API is able to connect to the server.
+     */
     setOnConnect(fn:()=>any):void{
         this.directSock.onopen=fn;
+    }
+    /**
+     * Set a onmessage callback.
+     * If you want to use a more syncronous approach, use {@linkcode YodelSocket.listen}.
+     * @param fn A callback for when this socket receives a yodel message that takes a {@linkcode Section} object.
+     */
+    setOnMessage(fn:(message:Section)=>any):void{
+        this.onmessage=fn;
     }
 
     private sendNewFormat(fmt:Format){
@@ -166,10 +212,14 @@ export class YodelSocket{
         );
     }
     /**
-     * Listen for an incoming yodel message
+     * Listen for an incoming yodel message.
+     * If you want to use the more event-driven structure use {@linkcode YodelSocket.setOnMessage}
+     * @returns Either the next incoming {@linkcode Section} from yodel, or undefined if none are available.
      */
-    listen(){
-        
+    listen(): Section | void {
+        if (this.messageStack.length != 0){
+            return this.messageStack.pop();
+        }
     }
     /**
      * Add this robot to a new group
@@ -182,7 +232,10 @@ export class YodelSocket{
                 }
             ));
     }
-
+    /**
+     * Apply a new name to this robot
+     * @param newname A new name for this robot
+     */
     setName(newname:string):void{
         this.name=newname;
         this.sendRawMessage(new YodelMessage(
@@ -208,4 +261,3 @@ export { InvalidFieldArgs } from "./errors"
 export { FieldType, Field } from "./field"
 export { Section } from "./section"
 export { Format } from "./format"
-export { bitCount, bytesToRepresent } from "./utilities"

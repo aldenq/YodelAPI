@@ -1,1 +1,14 @@
-{}
+{
+    "name":"YodelAPI",
+    "version": "v0.1.0-alpha",
+    "author": {
+        "name": "Philo Kaulkin",
+        "url" : "https://www.github.com/Phil0nator"
+    },
+    "contributors": [
+        {
+            "name": "Alden Quigley",
+            "url" : "https://wwwgithub.com/aldenq"
+        }
+    ]
+}
