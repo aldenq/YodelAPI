@@ -15,7 +15,6 @@ type SectionHandler = (data:Section)=>void;
  * @param event MessageEvent containing raw data
  */
 function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
-    console.log(event.data)
     let section:Section;
     let data = JSON.parse(event.data);
 
@@ -24,7 +23,7 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
     }else{
         section = new Section(new Format(data.kwargs.fields,data.kwargs.number),data.kwargs.fields,data.kwargs.payload)
     }
-    
+    console.log("TEST: ", section);
 
 
     if ( ysock.onmessage != null){

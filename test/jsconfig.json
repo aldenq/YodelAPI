@@ -1,0 +1,9 @@
+{
+    "include":[
+        "../dist/yodel.js"
+    ],
+    "files":[
+        "./test.js",
+        "../dist/yodel.js"
+    ]
+}

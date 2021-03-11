@@ -1,8 +1,9 @@
 from typing import *
 from queue import Queue
-import websockets
-from websockets.server import WebSocketServer
 
+# Yodel radio device name
 yodelStartRadio: str = ""
+# WebSocket port number
 port:int = 5560
-incomingTaskList:Queue = Queue(1024)
+# Global Queue for cross-thread communication
+outgoingMessages:Queue = Queue(1024)
