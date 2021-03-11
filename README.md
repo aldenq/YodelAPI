@@ -1,3 +1,4 @@
+# [Documentation](https://aldenq.github.io/YodelAPI/)
 # YodelAPI
 API for connecting websites with robots using [yodel](https://github.com/aldenq/Yodel).
 
@@ -14,6 +15,4 @@ API for connecting websites with robots using [yodel](https://github.com/aldenq/
 ```js
 import {...} from "./src/yodel"
 ```
-### Documentation
 
-- Coming soon...
