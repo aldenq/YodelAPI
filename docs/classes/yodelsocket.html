@@ -96,9 +96,10 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="yodelsocket.html#channel" class="tsd-kind-icon">channel</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="yodelsocket.html#directsock" class="tsd-kind-icon">direct<wbr>Sock</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="yodelsocket.html#groups" class="tsd-kind-icon">groups</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="yodelsocket.html#hostip" class="tsd-kind-icon">hostip</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="yodelsocket.html#messagestack" class="tsd-kind-icon">message<wbr>Stack</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="yodelsocket.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="yodelsocket.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="yodelsocket.html#onmessage" class="tsd-kind-icon">onmessage</a></li>
 							</ul>
 						</section>
@@ -107,6 +108,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="yodelsocket.html#addgroup" class="tsd-kind-icon">add<wbr>Group</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="yodelsocket.html#awaitconnection" class="tsd-kind-icon">await<wbr>Connection</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="yodelsocket.html#deletegroup" class="tsd-kind-icon">delete<wbr>Group</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="yodelsocket.html#listen" class="tsd-kind-icon">listen</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="yodelsocket.html#send" class="tsd-kind-icon">send</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="yodelsocket.html#sendnewformat" class="tsd-kind-icon">send<wbr>New<wbr>Format</a></li>
@@ -131,7 +133,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L117">src/yodel.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L120">src/yodel.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -167,7 +169,7 @@
 					<div class="tsd-signature tsd-kind-icon">channel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L106">src/yodel.ts:106</a></li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L106">src/yodel.ts:106</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -182,12 +184,27 @@
 					<div class="tsd-signature tsd-kind-icon">direct<wbr>Sock<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WebSocket</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L115">src/yodel.ts:115</a></li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L118">src/yodel.ts:118</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>WebSocket connected to given server</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="groups" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> groups</h3>
+					<div class="tsd-signature tsd-kind-icon">groups<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L110">src/yodel.ts:110</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The yodel groups that this socket is a part of</p>
 						</div>
 					</div>
 				</section>
@@ -197,7 +214,7 @@
 					<div class="tsd-signature tsd-kind-icon">hostip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L98">src/yodel.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L98">src/yodel.ts:98</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -213,17 +230,17 @@
 					<div class="tsd-signature tsd-kind-icon">message<wbr>Stack<span class="tsd-signature-symbol">:</span> <a href="section.html" class="tsd-signature-type" data-tsd-kind="Class">Section</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L117">src/yodel.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L120">src/yodel.ts:120</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L102">src/yodel.ts:102</a></li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L102">src/yodel.ts:102</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +255,7 @@
 					<div class="tsd-signature tsd-kind-icon">onmessage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SectionHandler</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L111">src/yodel.ts:111</a></li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L114">src/yodel.ts:114</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,7 +277,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L228">src/yodel.ts:228</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L231">src/yodel.ts:231</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -291,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L149">src/yodel.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L152">src/yodel.ts:152</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -306,6 +323,37 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="deletegroup" class="tsd-anchor"></a>
+					<h3>delete<wbr>Group</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Group<span class="tsd-signature-symbol">(</span>oldgroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L247">src/yodel.ts:247</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Make this YodelSocket leave an existing group</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>oldgroup: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An existing group that this YodelSocket is a part of</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="listen" class="tsd-anchor"></a>
 					<h3>listen</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -315,7 +363,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L219">src/yodel.ts:219</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L222">src/yodel.ts:222</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -339,7 +387,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L190">src/yodel.ts:190</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L193">src/yodel.ts:193</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -382,7 +430,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L178">src/yodel.ts:178</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L181">src/yodel.ts:181</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -405,7 +453,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L248">src/yodel.ts:248</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L277">src/yodel.ts:277</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -428,7 +476,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L239">src/yodel.ts:239</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L268">src/yodel.ts:268</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -459,7 +507,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L166">src/yodel.ts:166</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L169">src/yodel.ts:169</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -503,7 +551,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/f612abc/src/yodel.ts#L174">src/yodel.ts:174</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/e46e8fb/src/yodel.ts#L177">src/yodel.ts:177</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -570,6 +618,9 @@
 					<li class=" tsd-kind-class">
 						<a href="section.html" class="tsd-kind-icon">Section</a>
 					</li>
+					<li class=" tsd-kind-class">
+						<a href="unkowngroup.html" class="tsd-kind-icon">Unkown<wbr>Group</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -584,13 +635,16 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="yodelsocket.html#directsock" class="tsd-kind-icon">direct<wbr>Sock</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="yodelsocket.html#groups" class="tsd-kind-icon">groups</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="yodelsocket.html#hostip" class="tsd-kind-icon">hostip</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="yodelsocket.html#messagestack" class="tsd-kind-icon">message<wbr>Stack</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="yodelsocket.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -601,6 +655,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="yodelsocket.html#awaitconnection" class="tsd-kind-icon">await<wbr>Connection</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="yodelsocket.html#deletegroup" class="tsd-kind-icon">delete<wbr>Group</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="yodelsocket.html#listen" class="tsd-kind-icon">listen</a>

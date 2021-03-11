@@ -11,7 +11,7 @@
  */
 
 import { bitCount, bytesToRepresent } from "./utilities"
-import { InvalidFieldArgs } from "./errors"
+import { InvalidFieldArgs, UnkownGroup } from "./errors"
 import { FieldType, Field } from "./field"
 import { Section } from "./section"
 import { Format } from "./format"
@@ -99,12 +99,15 @@ export class YodelSocket{
     /**
      * The name of this socket (per yodel protocol)
      */
-    name:string;
+    private name:string;
     /**
      * The channel of this socket (per yodel protocol)
      */
     channel: number;
-
+    /**
+     * The yodel groups that this socket is a part of
+     */
+    private groups: Array<string> = [];
     /**
      * Message Handler
      */
@@ -226,12 +229,38 @@ export class YodelSocket{
      * @param newgroup new group to join
      */
     addGroup(newgroup:string):void{
+        // Check if the group is already joined.
+        if (this.groups.indexOf(newgroup)!=-1){
+            return;
+        }
         this.sendRawMessage(new YodelMessage(
             "addGroup",{
                 "group":newgroup
                 }
             ));
+        this.groups.push(newgroup);
     }
+    /**
+     * Make this YodelSocket leave an existing group
+     * @param oldgroup An existing group that this YodelSocket is a part of
+     */
+    deleteGroup(oldgroup:string):void{
+        
+        let idx = this.groups.indexOf(oldgroup);
+
+        if (idx == -1){
+            throw new UnkownGroup(oldgroup);
+        }
+
+        this.sendRawMessage(new YodelMessage(
+            "deleteGroup", {
+                "group":oldgroup
+            }
+        ));
+
+        this.groups.splice(idx, 1);
+    }
+
     /**
      * Apply a new name to this robot
      * @param newname A new name for this robot
@@ -257,7 +286,7 @@ export class YodelSocket{
 
 
 
-export { InvalidFieldArgs } from "./errors"
+export { InvalidFieldArgs, UnkownGroup } from "./errors"
 export { FieldType, Field } from "./field"
 export { Section } from "./section"
 export { Format } from "./format"

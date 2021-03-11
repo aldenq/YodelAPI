@@ -15,9 +15,14 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InvalidFieldArgs = void 0;
+exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
+/**
+ * InvalidFieldFieldArgs is thrown when invalid arguments are provided in the
+ * constructor for a {@linkcode Field} object.
+ */
 var InvalidFieldArgs = /** @class */ (function (_super) {
     __extends(InvalidFieldArgs, _super);
+    /**@private*/
     function InvalidFieldArgs(bytesproblem) {
         var _this = this;
         if (bytesproblem) {
@@ -32,4 +37,21 @@ var InvalidFieldArgs = /** @class */ (function (_super) {
     return InvalidFieldArgs;
 }(Error));
 exports.InvalidFieldArgs = InvalidFieldArgs;
+;
+/**
+ * UnkownGroup is thrown when a {@linkcode YodelSocket} tries to leave a group
+ * that it is not a part of.
+ * See {@linkcode YodelSocket.deleteGroup}
+ */
+var UnkownGroup = /** @class */ (function (_super) {
+    __extends(UnkownGroup, _super);
+    /**@private*/
+    function UnkownGroup(group) {
+        var _this = _super.call(this, "Cannot leave group '" + group + "' because this YodelSocket is not a part of group '" + group + "'") || this;
+        _this.name = "UnkownGroup";
+        return _this;
+    }
+    return UnkownGroup;
+}(Error));
+exports.UnkownGroup = UnkownGroup;
 ;
