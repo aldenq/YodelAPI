@@ -15,7 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
+exports.ReservedValue = exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
 /**
  * InvalidFieldFieldArgs is thrown when invalid arguments are provided in the
  * constructor for a {@linkcode Field} object.
@@ -41,7 +41,7 @@ exports.InvalidFieldArgs = InvalidFieldArgs;
 /**
  * UnkownGroup is thrown when a {@linkcode YodelSocket} tries to leave a group
  * that it is not a part of.
- * See {@linkcode YodelSocket.deleteGroup}
+ * See {@linkcode YodelSocket.leaveGroup}
  */
 var UnkownGroup = /** @class */ (function (_super) {
     __extends(UnkownGroup, _super);
@@ -55,3 +55,19 @@ var UnkownGroup = /** @class */ (function (_super) {
 }(Error));
 exports.UnkownGroup = UnkownGroup;
 ;
+/**
+ * ReservedValue is thrown when a user tries to use a value that is reserved for the api.
+ * e.g: Setting the mtype of a {@linkcode Format} object to -127 (this number is reserved
+ * for the API)
+ */
+var ReservedValue = /** @class */ (function (_super) {
+    __extends(ReservedValue, _super);
+    /**@private*/
+    function ReservedValue(value, assignment) {
+        var _this = _super.call(this, "Invalid use of reserved value [" + value + "] in assignment to '" + assignment + "'.") || this;
+        _this.name = "ReservedValue";
+        return _this;
+    }
+    return ReservedValue;
+}(Error));
+exports.ReservedValue = ReservedValue;

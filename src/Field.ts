@@ -1,4 +1,5 @@
 import { InvalidFieldArgs } from "./Errors";
+import { bytesToRepresent } from "./Utilities";
 /**
  * FieldType is an enumeration of normal python types.
  */
@@ -61,7 +62,8 @@ export class Field{
         }else if (args.length > 0 && type != FieldType.flags){
             throw new InvalidFieldArgs(false);
         }
-        
+
+
 
     }
 

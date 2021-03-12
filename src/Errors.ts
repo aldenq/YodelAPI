@@ -17,7 +17,7 @@ export class InvalidFieldArgs extends Error{
 /**
  * UnkownGroup is thrown when a {@linkcode YodelSocket} tries to leave a group
  * that it is not a part of.
- * See {@linkcode YodelSocket.deleteGroup}
+ * See {@linkcode YodelSocket.leaveGroup}
  */
 export class UnkownGroup extends Error{
     /**@private*/
@@ -27,3 +27,15 @@ export class UnkownGroup extends Error{
         this.name = "UnkownGroup";
     }
 };
+/**
+ * ReservedValue is thrown when a user tries to use a value that is reserved for the api.
+ * e.g: Setting the mtype of a {@linkcode Format} object to -127 (this number is reserved
+ * for the API)
+ */
+export class ReservedValue extends Error{
+    /**@private*/
+    constructor(value:string, assignment:string){
+        super("Invalid use of reserved value ["+value+"] in assignment to '"+assignment+"'.");
+        this.name = "ReservedValue";
+    }
+}

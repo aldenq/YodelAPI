@@ -6,7 +6,7 @@ socket.setOnConnect(function(){
 socket.setName(
     "YodelTest"
 );
-socket.addGroup("a");
+socket.joinGroup("a");
 
 
 

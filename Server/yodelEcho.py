@@ -5,7 +5,7 @@ yodel.startRadio(
 )
 yodel.setChannel(5)
 yodel.setName("YodelEcho")
-yodel.addGroup("b")
+yodel.joinGroup("b")
 
 ft = yodel.Format([yodel.Field("stringval", str, bytes=100)], mtype=5)
 s = yodel.Section(ft)

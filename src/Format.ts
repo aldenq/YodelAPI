@@ -1,3 +1,4 @@
+import { ReservedValue } from "./Errors";
 import { Field, FieldType } from "./Field"
 
 /**
@@ -17,11 +18,17 @@ export class Format{
      * Construct a new {@linkcode Format} object.
      * @param fields The {@linkcode Field} objects that define this new type
      * @param mtype The identifier for this type (must sync between yodel participants)
+     * @warning mtype must be between -126 and 127, excluding 0.
      */
     constructor(fields:Array<Field>, mtype:number=0){
         this.fields=fields;
+
+        if (mtype == -127){
+            throw new ReservedValue("-127","mtype");
+        }
+
         this.mtype = mtype;
     }
-
+    
 
 };

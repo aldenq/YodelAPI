@@ -1,5 +1,7 @@
-import { Field } from "./Field";
+import { Field, FieldType } from "./Field";
 import {Format} from "./Format"
+
+
 /**
  * A Section object is used to encode values organized by {@linkcode Field} objects within
  * a {@linkcode Format} object. A single {@linkcode Format} encodes mulpiple 
@@ -31,6 +33,7 @@ export class Section{
      */
     payload:string = "";
     
+
     /**
      * Construct a new Section for yodel.
      * @param fmt a {@linkcode Format} object to encode this section. see {@linkcode Section.format}
@@ -42,5 +45,6 @@ export class Section{
         this.fields = fields;
         this.payload = payload;
     }
+    
 
 };

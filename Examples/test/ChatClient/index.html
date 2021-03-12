@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Yodel Chat</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/js/uikit-icons.min.js"></script>
+        <!-- Yodel include -->
+        <script src="../../../dist/yodel.js"></script>
+    </head>
+    <body class="">
+        <div uk-grid class="uk-grid uk-sticky-top" uk-sticky="top:true">
+            <div class="uk-card uk-card-secondary uk-card-large uk-card-body uk-width-5-6">
+                <input class="uk-input" type="text" id="NameBox" placeholder="Name"></input>
+                <input class="uk-input uk-margin-small" type="text" id ="MessageBox" placeholder="Message"></input>
+            </div>
+            <div class="uk-card uk-card uk-card-secondary uk-card-large uk-card-body uk-width-1-6">
+                <button class = "uk-width-1-1 uk-height-1-1 uk-button uk-button-primary" id = "submit">Submit</button>
+            </div>
+        </div>
+        <div uk-grid>
+            <div class="uk-height-1-1 uk-panel uk-overflow-auto uk-width-1-1">
+                <ul class="uk-list uk-list-striped uk-padding" id="MessageList">
+                    
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script src="main.js"></script>
+</html>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>UnkownGroup | YodelAPI</title>
+	<title>ReservedValue | YodelAPI</title>
 	<meta name="description" content="Documentation for YodelAPI">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/errors.html">Errors</a>
 				</li>
 				<li>
-					<a href="errors.unkowngroup.html">UnkownGroup</a>
+					<a href="errors.reservedvalue.html">ReservedValue</a>
 				</li>
 			</ul>
-			<h1>Class UnkownGroup</h1>
+			<h1>Class ReservedValue</h1>
 		</div>
 	</div>
 </header>
@@ -71,9 +71,9 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>UnkownGroup is thrown when a <a href="yodel.yodelsocket.html"><code>YodelSocket</code></a> tries to leave a group
-							that it is not a part of.
-						See <a href="yodel.yodelsocket.html#leavegroup"><code>YodelSocket.leaveGroup</code></a></p>
+						<p>ReservedValue is thrown when a user tries to use a value that is reserved for the api.
+							e.g: Setting the mtype of a <a href="../modules/format.html"><code>Format</code></a> object to -127 (this number is reserved
+						for the API)</p>
 					</div>
 				</div>
 			</section>
@@ -84,7 +84,7 @@
 						<span class="tsd-signature-type">Error</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">UnkownGroup</span>
+								<span class="target">ReservedValue</span>
 							</li>
 						</ul>
 					</li>
@@ -97,15 +97,15 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="errors.unkowngroup.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="errors.reservedvalue.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.unkowngroup.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.unkowngroup.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.unkowngroup.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.reservedvalue.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.reservedvalue.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.reservedvalue.html#stack" class="tsd-kind-icon">stack</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,22 +117,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Unkown<wbr>Group<span class="tsd-signature-symbol">(</span>group<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="errors.unkowngroup.html" class="tsd-signature-type" data-tsd-kind="Class">UnkownGroup</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Reserved<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, assignment<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="errors.reservedvalue.html" class="tsd-signature-type" data-tsd-kind="Class">ReservedValue</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/29c8ac6/src/Errors.ts#L22">src/Errors.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/29c8ac6/src/Errors.ts#L35">src/Errors.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>group: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>assignment: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="errors.unkowngroup.html" class="tsd-signature-type" data-tsd-kind="Class">UnkownGroup</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="errors.reservedvalue.html" class="tsd-signature-type" data-tsd-kind="Class">ReservedValue</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -199,30 +202,30 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="errors.invalidfieldargs.html" class="tsd-kind-icon">Invalid<wbr>Field<wbr>Args</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="errors.reservedvalue.html" class="tsd-kind-icon">Reserved<wbr>Value</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="errors.unkowngroup.html" class="tsd-kind-icon">Unkown<wbr>Group</a>
+						<a href="errors.reservedvalue.html" class="tsd-kind-icon">Reserved<wbr>Value</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="errors.unkowngroup.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="errors.reservedvalue.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="errors.unkowngroup.html#message" class="tsd-kind-icon">message</a>
+								<a href="errors.reservedvalue.html#message" class="tsd-kind-icon">message</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="errors.unkowngroup.html#name" class="tsd-kind-icon">name</a>
+								<a href="errors.reservedvalue.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="errors.unkowngroup.html#stack" class="tsd-kind-icon">stack</a>
+								<a href="errors.reservedvalue.html#stack" class="tsd-kind-icon">stack</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="errors.unkowngroup.html" class="tsd-kind-icon">Unkown<wbr>Group</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

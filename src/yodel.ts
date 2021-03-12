@@ -32,11 +32,15 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
     let data = JSON.parse(event.data);
 
     if ("string" in data.kwargs){
-        section = new Section(new Format([], 0),{"":data.kwargs.string}, data.kwargs.string);
+        if (data.kwargs.string.startsWith(API_AUTO_DECODE_HEADER)){
+            let jsondata = data.kwargs.string.slice(API_AUTO_DECODE_HEADER.length);
+            section = new Section(new Format([],0), JSON.parse(jsondata),jsondata);
+        }else{
+            section = new Section(new Format([], 0),{"":data.kwargs.string}, data.kwargs.string);
+        }
     }else{
         section = new Section(new Format(data.kwargs.fields,data.kwargs.number),data.kwargs.fields,data.kwargs.payload)
     }
-    console.log("TEST: ", section);
 
 
     if ( ysock.onmessage != null){
@@ -46,6 +50,9 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
     }
 
 }
+
+/**@internal*/
+const API_AUTO_DECODE_HEADER = "__yodelapidecode";
 
 
 /**
@@ -57,7 +64,7 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
 class YodelMessage{
     /**
      * The action that is intended.
-     * e.g: "send", "listen", "addGroup"
+     * e.g: "send", "listen", "joinGroup"
      */
     action:string = "";
     /**
@@ -120,6 +127,7 @@ export class YodelSocket{
     /**@private*/
     messageStack: Array<Section> = [];
     
+
     /**
      * Construct a new YodelSocket
      * @param hostip The IP address (including port) of the server
@@ -191,7 +199,7 @@ export class YodelSocket{
      * @param outName The name you are sending to
      * @param outGroup The group you are sending to
      */
-    send(payload:string|Section|Blob, outName:string = "", outGroup:string = ""): void{
+    send(payload:string|Section|Blob|Object, outName:string = "", outGroup:string = ""): void{
         let sendType = "Basic";
         if (payload instanceof Section){
             
@@ -202,6 +210,13 @@ export class YodelSocket{
             payload.text().then(function(result:string){
                 payload = result;
             })
+        }else if (payload instanceof String){
+            // Do nothing
+        }else{
+            // Send an arbitrary object
+            
+            payload = API_AUTO_DECODE_HEADER+JSON.stringify(payload);
+
         }
         
         this.sendRawMessage(
@@ -229,13 +244,13 @@ export class YodelSocket{
      * Add this robot to a new group
      * @param newgroup new group to join
      */
-    addGroup(newgroup:string):void{
+    joinGroup(newgroup:string):void{
         // Check if the group is already joined.
         if (this.groups.indexOf(newgroup)!=-1){
             return;
         }
         this.sendRawMessage(new YodelMessage(
-            "addGroup",{
+            "joinGroup",{
                 "group":newgroup
                 }
             ));
@@ -245,7 +260,7 @@ export class YodelSocket{
      * Make this YodelSocket leave an existing group
      * @param oldgroup An existing group that this YodelSocket is a part of
      */
-    deleteGroup(oldgroup:string):void{
+    leaveGroup(oldgroup:string):void{
         
         let idx = this.groups.indexOf(oldgroup);
 
@@ -254,7 +269,7 @@ export class YodelSocket{
         }
 
         this.sendRawMessage(new YodelMessage(
-            "deleteGroup", {
+            "leaveGroup", {
                 "group":oldgroup
             }
         ));

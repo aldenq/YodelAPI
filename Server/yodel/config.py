@@ -94,7 +94,7 @@ def getName() -> str:
     return (globaldat.robotName)
 
 
-def addGroup(group):
+def joinGroup(group):
     """
     add robot to a new group
 
@@ -106,7 +106,7 @@ def addGroup(group):
     send_to_sender(["add_group", group])
 
 
-def deleteGroup(group) -> NoReturn:
+def leaveGroup(group) -> NoReturn:
     """
     remove robot from specifed group
 

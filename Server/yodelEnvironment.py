@@ -57,14 +57,14 @@ def passYodelSendSection(data):
     section = yodel.Section(passYodelNewFormat(sectionData["format"]))
     for key in sectionData["fields"]:
         section[key]=sectionData["fields"][key]
-    
+    section.print()
     section.payload = (sectionData["payload"]).encode()
     yodel.send(section,name=data["name"], group=data["group"])
 
 
-def passYodelAddGroup(data) : 
+def passYodeljoinGroup(data) : 
     '''Kwargs mapps directly to the call'''
-    yodel.addGroup(data["group"])
+    yodel.joinGroup(data["group"])
 
 def passYodelSetName(data) : 
     '''Kwargs mapps directly to the call'''
@@ -85,7 +85,7 @@ def passYodelNewField(data) -> yodel.Field :
     '''
     return yodel.Field(
         data["name"], 
-        apiEnumToPyType[data["type"]], 
+        apiEnumToPyType[int(data["type"])], 
         data["args"], 
         min=int(data["min"]), 
         max=int(data["max"]), 
@@ -123,11 +123,11 @@ def passYodelNewFormat(data) -> yodel.Format:
     return yodel.Format(
         [
         passYodelNewField(field) for field in data["fields"]
-        ], mtype=data["mtype"])
+        ], mtype=int(data["mtype"]))
 
 
-def passYodelDeleteGroup(data) -> NoReturn:
-    yodel.deleteGroup(data["group"]) 
+def passYodelleaveGroup(data) -> NoReturn:
+    yodel.leaveGroup(data["group"]) 
 
 def passYodelEnableRelay(data) -> NoReturn:
     yodel.enableRelay(bool(data["relay"]))
@@ -139,10 +139,10 @@ def passYodelEnableRelay(data) -> NoReturn:
 yodelResponses: Dict[str, Callable[[Dict[Any, Any]], Any]] = {
     "sendBasic" : passYodelSendBasic,
     "sendSection": passYodelSendSection,
-    "addGroup" : passYodelAddGroup,
+    "joinGroup" : passYodeljoinGroup,
     "setName"  : passYodelSetName,
     "createFormat" : passYodelNewFormat,
-    "deleteGroup" : passYodelDeleteGroup,
+    "leaveGroup" : passYodelleaveGroup,
     "enableRelay" : passYodelEnableRelay
 }
 
