@@ -107,7 +107,7 @@ export class YodelSocket{
     /**
      * The name of this socket (per yodel protocol)
      */
-    private name:string;
+    private _name:string;
     /**
      * The channel of this socket (per yodel protocol)
      */
@@ -126,7 +126,8 @@ export class YodelSocket{
     private directSock:WebSocket;
     /**@private*/
     messageStack: Array<Section> = [];
-    
+    /**@internal*/
+    private _relay:boolean = false;
 
     /**
      * Construct a new YodelSocket
@@ -136,7 +137,7 @@ export class YodelSocket{
     constructor(hostip:string, name:string = ""){
 
         this.hostip = hostip;
-        this.name = name;
+        this._name = name;
         this.channel = 0;
         
         this.directSock = new WebSocket(hostip);
@@ -281,13 +282,42 @@ export class YodelSocket{
      * Apply a new name to this robot
      * @param newname A new name for this robot
      */
-    setName(newname:string):void{
-        this.name=newname;
-        this.sendRawMessage(new YodelMessage(
-            "setName", {
-                "name":newname
-            }
-        ));
+    set name(newname:string){
+        if (newname != this._name){
+            this._name=newname;
+            this.sendRawMessage(new YodelMessage(
+                "setName", {
+                    "name":newname
+                }
+            ));
+        }
+    }
+
+    /**
+     * Get the current name of this robot
+     */
+    get name():string{
+        return this._name
+    }
+
+    /**
+     * relay is true when yodel's mesh networking features are active.
+     * To turn these features on, set relay to true. Or, to turn them off,
+     * set it to false.
+     */
+    get relay():boolean{
+        return this._relay;
+    }
+    /**
+     * Turn on or off yodel's mesh networking features.
+     * - See {@linkcode YodelSocket.relay}
+     * - See {@link "https://github.com/aldenq/Yodel#yodelenablerelaybool"}
+     */
+    set relay(val:boolean){
+        if(val != this._relay){
+            this._relay = val;
+            this.sendRawMessage(new YodelMessage("toggleRelay",{relay:val}));
+        }
     }
 
     private sendRawMessage(msg:YodelMessage){

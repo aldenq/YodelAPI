@@ -129,8 +129,8 @@ def passYodelNewFormat(data) -> yodel.Format:
 def passYodelleaveGroup(data) -> NoReturn:
     yodel.leaveGroup(data["group"]) 
 
-def passYodelEnableRelay(data) -> NoReturn:
-    yodel.enableRelay(bool(data["relay"]))
+def passYodelToggleRelay(data) -> NoReturn:
+    yodel.toggleRelay(bool(data["relay"]))
 
 # yodelResponses contains all the callbacks for the API calls.
 # So, when the JS sends over a request with {'action':'setName'}, the passYodelSetName function will be called
@@ -143,7 +143,7 @@ yodelResponses: Dict[str, Callable[[Dict[Any, Any]], Any]] = {
     "setName"  : passYodelSetName,
     "createFormat" : passYodelNewFormat,
     "leaveGroup" : passYodelleaveGroup,
-    "enableRelay" : passYodelEnableRelay
+    "toggleRelay" : passYodelToggleRelay
 }
 
 
