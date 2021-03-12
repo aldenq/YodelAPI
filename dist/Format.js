@@ -20,8 +20,15 @@ var Format = /** @class */ (function () {
         /**An identifier for this type*/
         this.mtype = 0;
         this.fields = fields;
+        // Verify that mtype is an acceptable value
         if (mtype == -127) {
             throw new Errors_1.ReservedValue("-127", "mtype");
+        }
+        else if (mtype < -127 || mtype > 127) {
+            throw new RangeError("Cannot assign value (" + mtype + ") to 'mtype' taking range: [-127:127, !0]");
+        }
+        else if (mtype == 0) {
+            throw new Errors_1.ReservedValue("0", "mtype");
         }
         this.mtype = mtype;
     }

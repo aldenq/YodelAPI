@@ -57,7 +57,8 @@ def passYodelSendSection(data):
     section = yodel.Section(passYodelNewFormat(sectionData["format"]))
     for key in sectionData["fields"]:
         section[key]=sectionData["fields"][key]
-    section.print()
+
+
     section.payload = (sectionData["payload"]).encode()
     yodel.send(section,name=data["name"], group=data["group"])
 
@@ -166,7 +167,7 @@ def yodelLoop() -> NoReturn:
                     raw = {"fields":raw.fields, "mtype":raw.format.mtype, "payload":raw.payload.decode()} 
                 # otherwise, the autoDecoded value is a string, or maybe an integer. Either way, it is string encoded.
                 else: 
-                    raw = {"string":raw.decode()}
+                    raw = {"payload":raw.decode()}
                 # the message sent back to the JS has action of 'incoming' to show that it is a new message
                 # and the kwargs contain either the payload of a raw message, 
                 # or the relevant section data of an encoded message.
@@ -176,6 +177,7 @@ def yodelLoop() -> NoReturn:
                         "kwargs":raw
                     }
                 )
+                print(message)
                 # The message (which is now just a string) can now be added to the global Queue 
                 # where it will be picked up from the WebSocket thread, and sent to the JS.
                 globals.outgoingMessages.put(message)
@@ -219,6 +221,7 @@ async def checkOutgoingJSON(sock:websockets.server.WebSocketServerProtocol) -> N
     '''
     if (globals.outgoingMessages.empty()):
         return
+
     await sock.send(
         globals.outgoingMessages.get()
     )

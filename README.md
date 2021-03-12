@@ -6,7 +6,7 @@ API for connecting websites with robots using [yodel](https://github.com/aldenq/
 
 ### Production ready code
 
-- You can find the production ready code to include in your HTML in [./dist/yodel.js](https://github.com/aldenq/YodelAPI/blob/main/dist/yodel.js)
+- You can find the production-ready code to include in your HTML in [./dist/yodel.js](https://github.com/aldenq/YodelAPI/blob/main/dist/yodel.js)
 
 ### Commented source code
 

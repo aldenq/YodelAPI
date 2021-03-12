@@ -3,9 +3,7 @@ socket.channel = 5;
 socket.setOnConnect(function(){
 
 
-socket.setName(
-    "YodelTest"
-);
+socket.name = "YodelTest";
 socket.joinGroup("a");
 
 

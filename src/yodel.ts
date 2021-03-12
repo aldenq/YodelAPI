@@ -22,6 +22,17 @@ import { Format } from "./Format"
  */
 type SectionHandler = (data:Section)=>void;
 
+
+/**@internal*/
+const API_AUTO_DECODE_HEADER = "__yodelapidecode";
+/**
+ * @internal
+ * API_EMPTY_FORMAT contains the reserved value -127
+*/
+const API_EMPTY_FORMAT = new Format([],1);
+API_EMPTY_FORMAT.mtype = -127;
+
+
 /**
  * Event listener for the WebSocket of a YodelSocket
  * @param ysock YodelSocket in question
@@ -31,28 +42,51 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
     let section:Section;
     let data = JSON.parse(event.data);
 
-    if ("string" in data.kwargs){
-        if (data.kwargs.string.startsWith(API_AUTO_DECODE_HEADER)){
-            let jsondata = data.kwargs.string.slice(API_AUTO_DECODE_HEADER.length);
-            section = new Section(new Format([],0), JSON.parse(jsondata),jsondata);
-        }else{
-            section = new Section(new Format([], 0),{"":data.kwargs.string}, data.kwargs.string);
+    if (data.action == "incoming"){
+
+        // Proper section type
+        if ("fields" in data.kwargs){
+            section = new Section(new Format(data.kwargs.fields,data.kwargs.number),data.kwargs.fields,data.kwargs.payload)
         }
-    }else{
-        section = new Section(new Format(data.kwargs.fields,data.kwargs.number),data.kwargs.fields,data.kwargs.payload)
+        // Raw string
+        else if ("payload" in data.kwargs){
+            // Check for auto decode
+            if(data.kwargs.payload.startsWith(API_AUTO_DECODE_HEADER)){
+
+                let jsondata = data.kwargs.payload.slice(API_AUTO_DECODE_HEADER.length);
+                section = new Section(API_EMPTY_FORMAT, JSON.parse(jsondata),jsondata);
+            // raw string
+            }else{
+
+                section = new Section(API_EMPTY_FORMAT,{"payload":data.kwargs.string}, data.kwargs.string);
+
+            }
+        }else {
+            throw new Error("Invalid Section data received: "+data);
+        }
+        
+    
+    
+        if ( ysock.onmessage != null){
+            ysock.onmessage(section);
+        }else{
+            ysock.messageStack.push(section);
+        }
+
+
+    } else if (data.action == "error"){
+
+        let error = new Error(data.kwargs.message);
+        error.name = data.kwargs.type;
+        throw error;
+
     }
 
 
-    if ( ysock.onmessage != null){
-        ysock.onmessage(section);
-    }else{
-        ysock.messageStack.push(section);
-    }
+    
 
 }
 
-/**@internal*/
-const API_AUTO_DECODE_HEADER = "__yodelapidecode";
 
 
 /**
@@ -153,24 +187,6 @@ export class YodelSocket{
 
     }
 
-
-    /**
-     * This function will block until this YodelSocket has an open connection to
-     * the YodelAPI server. If you want to use the more event driven structure,
-     * use {@linkcode YodelSocket.setOnConnect} 
-     */
-    awaitConnection():void {
-        let thisref = this;
-        setTimeout(
-            function () {
-                if (thisref.directSock.readyState != WebSocket.OPEN){
-                    thisref.awaitConnection()
-                }
-            }, 10
-        );
-
-    }
-
     /**
      * Set a callback for when the YodelSocket is able to connect.
      * If you want to use the more syncronous structure, use {@linkcode YodelSocket.awaitConnection}.
@@ -186,6 +202,9 @@ export class YodelSocket{
      */
     setOnMessage(fn:(message:Section)=>any):void{
         this.onmessage=fn;
+        this.messageStack.forEach(section => {
+            fn(section);
+        });
     }
 
     private sendNewFormat(fmt:Format){
@@ -216,8 +235,8 @@ export class YodelSocket{
         }else{
             // Send an arbitrary object
             
+            //payload = JSON.stringify({[API_AUTO_DECODE_HEADER]:JSON.stringify(payload)});
             payload = API_AUTO_DECODE_HEADER+JSON.stringify(payload);
-
         }
         
         this.sendRawMessage(
@@ -231,16 +250,7 @@ export class YodelSocket{
             )
         );
     }
-    /**
-     * Listen for an incoming yodel message.
-     * If you want to use the more event-driven structure use {@linkcode YodelSocket.setOnMessage}
-     * @returns Either the next incoming {@linkcode Section} from yodel, or undefined if none are available.
-     */
-    listen(): Section | void {
-        if (this.messageStack.length != 0){
-            return this.messageStack.pop();
-        }
-    }
+    
     /**
      * Add this robot to a new group
      * @param newgroup new group to join
