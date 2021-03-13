@@ -76,9 +76,7 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
 
     } else if (data.action == "error"){
 
-        let error = new Error(data.kwargs.message);
-        error.name = data.kwargs.type;
-        throw error;
+        throw new YodelMessage(data.kwargs.message, data.kwargs.name);
 
     }
 

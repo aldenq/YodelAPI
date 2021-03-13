@@ -15,7 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReservedValue = exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
+exports.YodelError = exports.ReservedValue = exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
 /**
  * InvalidFieldFieldArgs is thrown when invalid arguments are provided in the
  * constructor for a {@linkcode Field} object.
@@ -71,3 +71,14 @@ var ReservedValue = /** @class */ (function (_super) {
     return ReservedValue;
 }(Error));
 exports.ReservedValue = ReservedValue;
+var YodelError = /** @class */ (function (_super) {
+    __extends(YodelError, _super);
+    /**@private @internal*/
+    function YodelError(message, name) {
+        var _this = _super.call(this, message) || this;
+        _this.name = name;
+        return _this;
+    }
+    return YodelError;
+}(Error));
+exports.YodelError = YodelError;

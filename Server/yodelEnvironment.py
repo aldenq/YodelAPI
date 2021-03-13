@@ -1,3 +1,4 @@
+from yodel.errors import YodelError
 from asyncio.exceptions import CancelledError
 from json.decoder import JSONDecodeError
 from types import FunctionType, LambdaType
@@ -28,6 +29,13 @@ apiEnumToPyType = {
     3: yodel.Flags
 }
 
+def insulatePassYodelCall(fn, data):
+    try:
+        fn(data)
+    except YodelError as e:
+        # Any yodel related errors are sent back up to the JS client to be thrown as JS errors
+        print(str(e))
+        globals.outgoingMessages.put({"name":e.__name__,"message":str(e)})
 
 '''
 The following functions are designed to take in the 'kwargs' part of a JSON
@@ -181,8 +189,11 @@ def yodelLoop() -> NoReturn:
                 # The message (which is now just a string) can now be added to the global Queue 
                 # where it will be picked up from the WebSocket thread, and sent to the JS.
                 globals.outgoingMessages.put(message)
-        except Error as e:
+        
+        except YodelError as e:
+            # Any yodel related errors are sent back up to the JS client to be thrown as JS errors
             print(str(e))
+            globals.outgoingMessages.put({"name":e.__name__,"message":str(e)})
 
 async def checkIncomingJSON(sock:websockets.server.WebSocketServerProtocol) -> NoReturn:
     '''
@@ -210,7 +221,7 @@ async def checkIncomingJSON(sock:websockets.server.WebSocketServerProtocol) -> N
     if ('channel' in kwargs):
         yodel.setChannel(int(kwargs["channel"]))
 
-    yodelResponses[action](kwargs)
+    insulatePassYodelCall(yodelResponses[action],kwargs)
 
 
 

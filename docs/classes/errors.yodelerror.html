@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>InvalidFieldArgs | YodelAPI</title>
+	<title>YodelError | YodelAPI</title>
 	<meta name="description" content="Documentation for YodelAPI">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,24 +58,16 @@
 					<a href="../modules/errors.html">Errors</a>
 				</li>
 				<li>
-					<a href="errors.invalidfieldargs.html">InvalidFieldArgs</a>
+					<a href="errors.yodelerror.html">YodelError</a>
 				</li>
 			</ul>
-			<h1>Class InvalidFieldArgs</h1>
+			<h1>Class YodelError</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>InvalidFieldFieldArgs is thrown when invalid arguments are provided in the
-						constructor for a <a href="../modules/field.html"><code>Field</code></a> object.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -83,7 +75,7 @@
 						<span class="tsd-signature-type">Error</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">InvalidFieldArgs</span>
+								<span class="target">YodelError</span>
 							</li>
 						</ul>
 					</li>
@@ -96,15 +88,15 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="errors.invalidfieldargs.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="errors.yodelerror.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.invalidfieldargs.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.invalidfieldargs.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.invalidfieldargs.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.yodelerror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.yodelerror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.yodelerror.html#stack" class="tsd-kind-icon">stack</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,22 +108,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Invalid<wbr>Field<wbr>Args<span class="tsd-signature-symbol">(</span>bytesproblem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="errors.invalidfieldargs.html" class="tsd-signature-type" data-tsd-kind="Class">InvalidFieldArgs</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Yodel<wbr>Error<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="errors.yodelerror.html" class="tsd-signature-type" data-tsd-kind="Class">YodelError</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/737016d/src/Errors.ts#L5">src/Errors.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/737016d/src/Errors.ts#L43">src/Errors.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>bytesproblem: <span class="tsd-signature-type">boolean</span></h5>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="errors.invalidfieldargs.html" class="tsd-signature-type" data-tsd-kind="Class">InvalidFieldArgs</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="errors.yodelerror.html" class="tsd-signature-type" data-tsd-kind="Class">YodelError</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -195,36 +190,36 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="errors.invalidfieldargs.html" class="tsd-kind-icon">Invalid<wbr>Field<wbr>Args</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="errors.invalidfieldargs.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="errors.invalidfieldargs.html#message" class="tsd-kind-icon">message</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="errors.invalidfieldargs.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="errors.invalidfieldargs.html#stack" class="tsd-kind-icon">stack</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="errors.reservedvalue.html" class="tsd-kind-icon">Reserved<wbr>Value</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="errors.unkowngroup.html" class="tsd-kind-icon">Unkown<wbr>Group</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="errors.yodelerror.html" class="tsd-kind-icon">Yodel<wbr>Error</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="errors.yodelerror.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="errors.yodelerror.html#message" class="tsd-kind-icon">message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="errors.yodelerror.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="errors.yodelerror.html#stack" class="tsd-kind-icon">stack</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>

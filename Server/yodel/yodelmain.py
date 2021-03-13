@@ -74,8 +74,8 @@ def startRadio(interface: str) -> NoReturn:  # all functions needed to initiate 
     """
     automatically setups wireless interface to work with yodel. also setups up sender and receiver threads.
 
-
-    @param interface: interface to be used with yodel
+    Args:
+    	 interface: interface to be used with yodel
     """
     autoConf(interface)
     setInterface(interface)

@@ -39,3 +39,11 @@ export class ReservedValue extends Error{
         this.name = "ReservedValue";
     }
 }
+
+export class YodelError extends Error{
+    /**@private @internal*/
+    constructor(message:string, name:string){
+        super(message);
+        this.name=name;
+    }
+}

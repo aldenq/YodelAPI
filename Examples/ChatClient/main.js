@@ -1,6 +1,6 @@
 
 // Create a new yodel socket connected to the local API server
-let yodelSocket = new yodel.YodelSocket("ws://localhost:5560", "GenericName");
+let yodelSocket = new yodel.YodelSocket("ws://localhost:5560", "YodelTest");
 
 
 // Collect some HTML elements:
@@ -21,6 +21,7 @@ function addMessage(name, message){
 // Setup the yodel socket
 function setup(){
     yodelSocket.channel = 5;
+    yodelSocket.name = "YodelTest";
     yodelSocket.joinGroup("a");
 }
 
