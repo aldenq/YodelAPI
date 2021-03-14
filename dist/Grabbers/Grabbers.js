@@ -82,15 +82,47 @@ var Grabber = /** @class */ (function () {
         delete this.eventCache[key];
     };
     /**
+     * Determine if a Grabber is currently sending to a given socket, group and name.
+     * @see {@linkcode Grabber.sendTo} for more about sending events.
+     * @param sock A {@linkcode YodelSocket} object
+     * @param sendName A name to send to
+     * @param sendGroup A group to send to
+     * @returns If this Grabber is currently sending to the given socket, group and name.
+     */
+    Grabber.prototype.isSendingTo = function (sock, sendName, sendGroup) {
+        if (sendName === void 0) { sendName = ""; }
+        if (sendGroup === void 0) { sendGroup = ""; }
+        var key = sendName + sendGroup + String(sock.id);
+        return key in this.eventCache;
+    };
+    /**
+     * Determine if a given {@linkcode ListenCollector} is currently linked to this Grabber.
+     * @see {@linkcode Grabber.linkTo} for more about Grabber linking
+     * @param collector A {@linkcode ListenCollector} object that might be linked to this Grabber
+     * @returns If collector is currently linked to this Grabber
+     */
+    Grabber.prototype.isLinkedTo = function (collector) {
+        return collector.name in this.eventCache;
+    };
+    /**
      * constructGrabPacket is used internally to envelop event data with its appropriate
      * metadata.
      * @param data The actual event data being sent
      * @returns A combination of the data given with the appropriate metadata.
      */
-    Grabber.prototype.constructGrabPacket = function (data) {
-        var _a;
-        return _a = {}, _a[exports.API_GRABBER_HEADER_KEY] = typeof (this), _a.data = data, _a;
+    Grabber.prototype.constructGrabPacket = function (name, data) {
+        data.__grabbertype = name;
+        return data;
     };
+    /**
+     * Check if any object is an event produced by a Grabber.
+     * @param x Any object
+     * @returns If x is an event produced by a Grabber
+     */
+    Grabber.isGrabberEvent = function (x) {
+        return x.__grabbertype != undefined;
+    };
+    ;
     return Grabber;
 }());
 exports.Grabber = Grabber;

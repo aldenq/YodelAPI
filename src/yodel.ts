@@ -54,7 +54,9 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
             if(data.kwargs.payload.startsWith(API_AUTO_DECODE_HEADER)){
 
                 let jsondata = data.kwargs.payload.slice(API_AUTO_DECODE_HEADER.length);
-                section = new Section(API_EMPTY_FORMAT, JSON.parse(jsondata),jsondata);
+                let json = JSON.parse(jsondata);
+                
+                section = new Section(API_EMPTY_FORMAT, json,jsondata);
             // raw string
             }else{
 

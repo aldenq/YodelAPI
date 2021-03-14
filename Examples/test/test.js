@@ -1,30 +1,22 @@
 var socket = new yodel.YodelSocket("ws://localhost:5560", "name");
 socket.channel = 5;
+var keyboard = new yodel.KeyboardGrabber();
 socket.setOnConnect(function(){
 
 
 socket.name = "YodelTest";
 socket.joinGroup("a");
 
-
-
-let formater = new yodel.Format([new yodel.Field("stringval", yodel.FieldType.str, bytes=100)], 5);
-
-let sect = new yodel.Section(formater, {"stringval":"teststring"});
-
-socket.send(sect, name="YodelEcho", group="b");
-
-
-
-
-
+keyboard.sendTo(socket, "YodelEcho", "b");
 
 });
 
 socket.onmessage = function(msg){
-
-    console.log(msg);
-    console.log(msg.stringval);
-    console.log(msg.payload);
-
+    if (yodel.KeyboardGrabber.isEvent(msg.fields)){
+        console.log(msg.fields);
+        //if(keyboard.isSendingTo(socket, "YodelEcho", "b")){
+        //    keyboard.stopSendingTo(socket, "YodelEcho", "b");
+        //}
+        //socket.send("test", "YodelEcho", "b");
+    }
 }

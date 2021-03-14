@@ -1,3 +1,20 @@
+/**
+ * @module
+ * @description  <br/>
+ * 
+ * # Grabbers
+ * Grabbers are used to 'grab' different types of input, and pipe them either directly
+ * through a YodelSocket, or directly into another grabber. 
+ * 
+ * ## Example
+ * 
+ * The following code is all you would need to pipe all keyboard input through an existing YodelSocket.
+ * ```js
+ * let keyboard = new yodel.KeyboardGrabber();
+ * keyboard.sendTo(myYodelSocket, "sendToName", "sendToGroup");
+ * ```
+ * 
+ */
 import { YodelSocket } from "../yodel";
 
 
@@ -158,15 +175,48 @@ export abstract class Grabber{
         }
         delete this.eventCache[key];
     }
+
+    /**
+     * Determine if a Grabber is currently sending to a given socket, group and name.
+     * @see {@linkcode Grabber.sendTo} for more about sending events.
+     * @param sock A {@linkcode YodelSocket} object
+     * @param sendName A name to send to
+     * @param sendGroup A group to send to
+     * @returns If this Grabber is currently sending to the given socket, group and name.
+     */
+    isSendingTo(sock:YodelSocket, sendName:string="", sendGroup:string=""):boolean{
+        let key = sendName+sendGroup+String(sock.id);
+        return key in this.eventCache;
+    }
+    /**
+     * Determine if a given {@linkcode ListenCollector} is currently linked to this Grabber.
+     * @see {@linkcode Grabber.linkTo} for more about Grabber linking
+     * @param collector A {@linkcode ListenCollector} object that might be linked to this Grabber
+     * @returns If collector is currently linked to this Grabber
+     */
+    isLinkedTo(collector:ListenCollector):boolean{
+        return collector.name in this.eventCache;
+    }
+
     /**
      * constructGrabPacket is used internally to envelop event data with its appropriate
      * metadata.
      * @param data The actual event data being sent
      * @returns A combination of the data given with the appropriate metadata.
      */
-    protected constructGrabPacket(data:any):any {
-        return {[API_GRABBER_HEADER_KEY]:typeof(this), data:data};
+    protected constructGrabPacket(name:string, data:any):any {
+        data.__grabbertype=name;
+        return data;
     }
+
+    /**
+     * Check if any object is an event produced by a Grabber.
+     * @param x Any object
+     * @returns If x is an event produced by a Grabber
+     */
+    static isGrabberEvent(x:any):boolean{
+        return x.__grabbertype != undefined;
+    };
 
 }
 

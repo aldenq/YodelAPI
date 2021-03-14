@@ -14,6 +14,7 @@ export class KeyboardGrabber extends Grabber{
      * proved a different element in the constructor.
      */
     private sourceElement:HTMLElement | Document = document;
+    
     /**
      * Construct a new KeyboardGrabber for a given HTMLElement, or ```document``` by default.
      * @param element An HTMLElement to collect keyboard input from.
@@ -27,8 +28,13 @@ export class KeyboardGrabber extends Grabber{
         let keydown = (event:Event)=>{
             sock.send(
                 this.constructGrabPacket(
+                    "keyboard",
                     {
-                        code:(<KeyboardEvent>event).code
+
+                        code:(<KeyboardEvent>event).code,
+                        key:(<KeyboardEvent>event).key,
+                        type:"keydown"
+
                     }), 
                     sendName, 
                     sendGroup
@@ -37,8 +43,13 @@ export class KeyboardGrabber extends Grabber{
         let keyup = (event:Event)=>{
             sock.send(
                 this.constructGrabPacket(
+                    "keyboard",
                     {
-                        code:(<KeyboardEvent>event).code
+
+                        code:(<KeyboardEvent>event).code,
+                        key:(<KeyboardEvent>event).key,
+                        type:"keyup"
+
                     }), 
                     sendName, 
                     sendGroup
@@ -79,4 +90,14 @@ export class KeyboardGrabber extends Grabber{
             }
         }
     }
+
+    /**
+     * Test if any object is an event produced by a KeyboardGrabber.
+     * @param x Any object
+     * @returns If x is an event produced by a KeyboardGrabber
+     */
+    static isEvent(x:any):boolean{
+        return Grabber.isGrabberEvent(x) && x.__grabbertype == "keyboard";
+    }
+
 };

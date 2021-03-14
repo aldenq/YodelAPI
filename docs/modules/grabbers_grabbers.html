@@ -65,6 +65,27 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt>description</dt>
+						<dd><br/>
+							<a href="#grabbers" id="grabbers" style="color: inherit; text-decoration: none;">
+								<h1>Grabbers</h1>
+							</a>
+							<p>Grabbers are used to &#39;grab&#39; different types of input, and pipe them either directly
+							through a YodelSocket, or directly into another grabber.</p>
+							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+								<h2>Example</h2>
+							</a>
+							<p>The following code is all you would need to pipe all keyboard input through an existing YodelSocket.</p>
+							<pre><code class="language-js"><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">keyboard</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">yodel</span><span style="color: #000000">.</span><span style="color: #795E26">KeyboardGrabber</span><span style="color: #000000">();</span>
+<span style="color: #001080">keyboard</span><span style="color: #000000">.</span><span style="color: #795E26">sendTo</span><span style="color: #000000">(</span><span style="color: #001080">myYodelSocket</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;sendToName&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;sendToGroup&quot;</span><span style="color: #000000">);</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -118,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">Listen<wbr>Collector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/Grabbers/Grabbers.ts:17</li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/c852dcf/src/Grabbers/Grabbers.ts#L34">src/Grabbers/Grabbers.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -169,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">API_<wbr>GRABBER_<wbr>HEADER_<wbr>KEY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;__grabber&quot;</span><span class="tsd-signature-symbol"> = &quot;__grabber&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/Grabbers/Grabbers.ts:38</li>
+							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/c852dcf/src/Grabbers/Grabbers.ts#L55">src/Grabbers/Grabbers.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">

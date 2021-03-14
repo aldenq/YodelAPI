@@ -43,6 +43,7 @@ request, and use them to make an yodel call with info from the call.
 '''
 def passYodelSendBasic(data): 
     '''The basic send function's kwargs are directly mapped'''
+    print("RAW:", data["payload"])
     yodel.send(data["payload"], name=data["name"], group=data["group"])
 
 def passYodelSendSection(data):

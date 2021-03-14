@@ -44,13 +44,17 @@ var KeyboardGrabber = /** @class */ (function (_super) {
     KeyboardGrabber.prototype.generateListeners = function (sock, sendName, sendGroup) {
         var _this = this;
         var keydown = function (event) {
-            sock.send(_this.constructGrabPacket({
-                code: event.code
+            sock.send(_this.constructGrabPacket("keyboard", {
+                code: event.code,
+                key: event.key,
+                type: "keydown"
             }), sendName, sendGroup);
         };
         var keyup = function (event) {
-            sock.send(_this.constructGrabPacket({
-                code: event.code
+            sock.send(_this.constructGrabPacket("keyboard", {
+                code: event.code,
+                key: event.key,
+                type: "keyup"
             }), sendName, sendGroup);
         };
         return { "keydown": keydown, "keyup": keyup };
@@ -83,6 +87,14 @@ var KeyboardGrabber = /** @class */ (function (_super) {
                 this.sourceElement.removeEventListener(listenType, listener);
             }
         }
+    };
+    /**
+     * Test if any object is an event produced by a KeyboardGrabber.
+     * @param x Any object
+     * @returns If x is an event produced by a KeyboardGrabber
+     */
+    KeyboardGrabber.isEvent = function (x) {
+        return Grabbers_1.Grabber.isGrabberEvent(x) && x.__grabbertype == "keyboard";
     };
     return KeyboardGrabber;
 }(Grabbers_1.Grabber));
