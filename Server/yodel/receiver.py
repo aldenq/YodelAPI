@@ -70,7 +70,6 @@ def is_recipient(
         groupM = (group in globaldat.groups or gnamelen == 0)
 
         relay = (globaldat.relay == True and not (name == globaldat.robotName))
-
         return(nameM and groupM, relay)
 
     return (False)
@@ -120,7 +119,7 @@ def listenrecv(pipe: mp.Pipe) -> bytearray:
 
     # radio tap headers are stripped on external frames (non loopback)
     if starth == b"\x72\x6f\x62\x6f\x74":
-        
+        #print("yodelprint:", payload)
         # additionally check for settings change if any yodel data is captured
         # to see if anything important has changed
         settings_check(pipe)

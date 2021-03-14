@@ -39,11 +39,37 @@ export class ReservedValue extends Error{
         this.name = "ReservedValue";
     }
 }
-
+/**
+ * A YodelError is thrown when the yodel instance running on the API remote catches
+ * a python error coming from yodel.
+ */
 export class YodelError extends Error{
     /**@private @internal*/
     constructor(message:string, name:string){
         super(message);
         this.name=name;
+    }
+}
+/**
+ * The APIConnectionError is thrown when a {@linkcode YodelSocket} has lost, or has not yet created its 
+ * connection to the API remote (the server).
+ */
+export class APIConnectionError extends Error{
+    /**@private @internal*/
+    constructor(readystate:number){
+        switch (readystate) {
+            case WebSocket.CONNECTING:
+                super("This Yodel Socket has not yet connected to the API remote.");
+                break;
+            case WebSocket.CLOSED:
+                super("This Yodel Socket has lost connection to the API remote.");
+                break;
+            case WebSocket.CLOSING:
+                super("This Yodel Socket is closing connection to the API remote.");
+                break;
+            default:
+                super("This Yodel Socket does not have a connection to the API remote.");
+                break;
+        }
     }
 }

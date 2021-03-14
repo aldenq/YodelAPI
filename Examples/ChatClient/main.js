@@ -17,10 +17,10 @@ function addMessage(name, message){
     message+
     "</p></li>";
 }
- 
+
 // Setup the yodel socket
 function setup(){
-    yodelSocket.channel = 5;
+    yodelSocket.channel = 8;
     yodelSocket.name = "YodelTest";
     yodelSocket.joinGroup("a");
 }
@@ -40,7 +40,7 @@ function localMessageAdder(){
         yodelSocket.send({
             name: nameBox.value,
             message: textBox.value
-        });
+        }, "YodelEcho", "b");
         
         // Reset the textbox
         textBox.value = ""
@@ -51,3 +51,10 @@ function localMessageAdder(){
 submit.onclick = localMessageAdder;
 yodelSocket.setOnConnect(setup);
 yodelSocket.setOnMessage(receiver);
+
+let collector = (event, type)=>{
+    console.log(type, event);
+}
+
+let testgrab = new yodel.KeyboardGrabber();
+testgrab.linkTo(collector);

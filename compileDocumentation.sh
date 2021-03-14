@@ -1,1 +1,2 @@
-typedoc --out docs --excludeInternal  --exclude "./src/Utilities.ts" ./src/
+typedoc --out docs --exclude "./src/Utilities.ts" ./src/
+#--excludeInternal

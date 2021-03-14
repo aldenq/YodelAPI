@@ -217,7 +217,7 @@ async def checkIncomingJSON(sock:websockets.server.WebSocketServerProtocol) -> N
         print(str(e))
     action = jsonRequest["action"]
     kwargs = jsonRequest["kwargs"]
-    #print(jsonRequest)
+    print(jsonRequest)
     if ('channel' in kwargs):
         yodel.setChannel(int(kwargs["channel"]))
 

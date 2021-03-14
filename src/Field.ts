@@ -5,13 +5,13 @@ import { bytesToRepresent } from "./Utilities";
  */
 export class FieldType{
     /**The 'int' type from python */
-    static int:number = 0;
+    static readonly int:number = 0;
     /**The 'str' type from python */
-    static str:number = 1;
+    static readonly str:number = 1;
     /**The 'bytearray' type from python */
-    static bytearray:number = 2;
+    static readonly bytearray:number = 2;
     /**The yodel.flags type from yodel */
-    static flags:number = 3;
+    static readonly flags:number = 3;
 };
 /**
  * A Field is used to encode one part of a {@linkcode Format}.

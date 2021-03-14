@@ -15,7 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.YodelError = exports.ReservedValue = exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
+exports.APIConnectionError = exports.YodelError = exports.ReservedValue = exports.UnkownGroup = exports.InvalidFieldArgs = void 0;
 /**
  * InvalidFieldFieldArgs is thrown when invalid arguments are provided in the
  * constructor for a {@linkcode Field} object.
@@ -71,6 +71,10 @@ var ReservedValue = /** @class */ (function (_super) {
     return ReservedValue;
 }(Error));
 exports.ReservedValue = ReservedValue;
+/**
+ * A YodelError is thrown when the yodel instance running on the API remote catches
+ * a python error coming from yodel.
+ */
 var YodelError = /** @class */ (function (_super) {
     __extends(YodelError, _super);
     /**@private @internal*/
@@ -82,3 +86,31 @@ var YodelError = /** @class */ (function (_super) {
     return YodelError;
 }(Error));
 exports.YodelError = YodelError;
+/**
+ * The APIConnectionError is thrown when a {@linkcode YodelSocket} has lost, or has not yet created its
+ * connection to the API remote (the server).
+ */
+var APIConnectionError = /** @class */ (function (_super) {
+    __extends(APIConnectionError, _super);
+    /**@private @internal*/
+    function APIConnectionError(readystate) {
+        var _this = this;
+        switch (readystate) {
+            case WebSocket.CONNECTING:
+                _this = _super.call(this, "This Yodel Socket has not yet connected to the API remote.") || this;
+                break;
+            case WebSocket.CLOSED:
+                _this = _super.call(this, "This Yodel Socket has lost connection to the API remote.") || this;
+                break;
+            case WebSocket.CLOSING:
+                _this = _super.call(this, "This Yodel Socket is closing connection to the API remote.") || this;
+                break;
+            default:
+                _this = _super.call(this, "This Yodel Socket does not have a connection to the API remote.") || this;
+                break;
+        }
+        return _this;
+    }
+    return APIConnectionError;
+}(Error));
+exports.APIConnectionError = APIConnectionError;

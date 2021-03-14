@@ -12,11 +12,11 @@
 
 
 import { bitCount, bytesToRepresent } from "./Utilities"
-import { InvalidFieldArgs, UnkownGroup } from "./Errors"
+import { APIConnectionError, InvalidFieldArgs, UnkownGroup } from "./Errors"
 import { FieldType, Field } from "./Field"
 import { Section } from "./Section"
 import { Format } from "./Format"
-
+import { Grabber, KeyboardGrabber } from "./Grabbers/Grabbers"
 /**
  * A function meant to deal with a Section
  */
@@ -66,23 +66,22 @@ function handleIncomingMessage(ysock:YodelSocket, event:MessageEvent):void{
         }
         
     
-    
+        // Depending on how the socket is set up, different actions are taken with the new section
         if ( ysock.onmessage != null){
+            // If a callback is set up, it is called with section.
             ysock.onmessage(section);
         }else{
+            // Otherwise, it is pushed to the stack for later.
             ysock.messageStack.push(section);
         }
 
 
     } else if (data.action == "error"){
-
+        // When the API remote catches a yodel-related error, it is sent back up here
+        // to be thrown as a JS error.
         throw new YodelMessage(data.kwargs.message, data.kwargs.name);
 
     }
-
-
-    
-
 }
 
 
@@ -139,7 +138,7 @@ export class YodelSocket{
     /**
      * The name of this socket (per yodel protocol)
      */
-    private _name:string;
+    private _name:string = "";
     /**
      * The channel of this socket (per yodel protocol)
      */
@@ -161,27 +160,27 @@ export class YodelSocket{
     /**@internal*/
     private _relay:boolean = false;
 
+
+    private static idcounter = 0;
+    readonly id:number = YodelSocket.idcounter;
+
+
+
     /**
      * Construct a new YodelSocket
      * @param hostip The IP address (including port) of the server
-     * @param name The name for 'this' robot (optional)
      */
-    constructor(hostip:string, name:string = ""){
+    constructor(hostip:string){
 
         this.hostip = hostip;
-        this._name = name;
         this.channel = 0;
         
-        this.directSock = new WebSocket(hostip);
-        
-        
+        this.directSock = new WebSocket(this.hostip);
         var thisref:YodelSocket = this;
-        
-        
         this.directSock.addEventListener('message', (function(this, event:MessageEvent){
             handleIncomingMessage(thisref, event);
         }));
-        
+        YodelSocket.idcounter++;
 
     }
 
@@ -328,7 +327,14 @@ export class YodelSocket{
         }
     }
 
+
+
     private sendRawMessage(msg:YodelMessage){
+        if (this.directSock.readyState != WebSocket.OPEN){
+            throw new APIConnectionError(this.directSock.readyState);
+        }
+        
+        
         let rawform:string = msg.stringify();
         this.directSock.send(rawform);
     }
@@ -340,7 +346,8 @@ export class YodelSocket{
 
 
 
-export { InvalidFieldArgs, UnkownGroup } from "./Errors"
+export { InvalidFieldArgs, UnkownGroup, YodelError, APIConnectionError } from "./Errors"
 export { FieldType, Field } from "./Field"
 export { Section } from "./Section"
 export { Format } from "./Format"
+export { Grabber, KeyboardGrabber } from "./Grabbers/Grabbers"

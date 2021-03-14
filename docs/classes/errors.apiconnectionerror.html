@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FieldType | YodelAPI</title>
+	<title>APIConnectionError | YodelAPI</title>
 	<meta name="description" content="Documentation for YodelAPI">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">YodelAPI</a>
 				</li>
 				<li>
-					<a href="../modules/field.html">Field</a>
+					<a href="../modules/errors.html">Errors</a>
 				</li>
 				<li>
-					<a href="field.fieldtype.html">FieldType</a>
+					<a href="errors.apiconnectionerror.html">APIConnectionError</a>
 				</li>
 			</ul>
-			<h1>Class FieldType</h1>
+			<h1>Class APIConnectionError</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>FieldType is an enumeration of normal python types.</p>
+						<p>The APIConnectionError is thrown when a <a href="yodel.yodelsocket.html"><code>YodelSocket</code></a> has lost, or has not yet created its
+						connection to the API remote (the server).</p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +80,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">FieldType</span>
+						<span class="tsd-signature-type">Error</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">APIConnectionError</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -90,16 +96,15 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="field.fieldtype.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="errors.apiconnectionerror.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="field.fieldtype.html#bytearray" class="tsd-kind-icon">bytearray</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="field.fieldtype.html#flags" class="tsd-kind-icon">flags</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="field.fieldtype.html#int" class="tsd-kind-icon">int</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="field.fieldtype.html#str" class="tsd-kind-icon">str</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.apiconnectionerror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.apiconnectionerror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="errors.apiconnectionerror.html#stack" class="tsd-kind-icon">stack</a></li>
 							</ul>
 						</section>
 					</div>
@@ -111,78 +116,57 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Field<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="field.fieldtype.html" class="tsd-signature-type" data-tsd-kind="Class">FieldType</a></li>
+						<li class="tsd-signature tsd-kind-icon">new APIConnection<wbr>Error<span class="tsd-signature-symbol">(</span>readystate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="errors.apiconnectionerror.html" class="tsd-signature-type" data-tsd-kind="Class">APIConnectionError</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/479f0ce/src/Errors.ts#L57">src/Errors.ts:57</a></li>
+								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="field.fieldtype.html" class="tsd-signature-type" data-tsd-kind="Class">FieldType</a></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>readystate: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="errors.apiconnectionerror.html" class="tsd-signature-type" data-tsd-kind="Class">APIConnectionError</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="bytearray" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span class="tsd-flag ts-flagStatic">Static</span> bytearray</h3>
-					<div class="tsd-signature tsd-kind-icon">bytearray<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 2</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="message" class="tsd-anchor"></a>
+					<h3>message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/479f0ce/src/Field.ts#L12">src/Field.ts:12</a></li>
+							<li>Defined in ../../../../../usr/local/lib/node_modules/typescript/lib/lib.es5.d.ts:974</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The &#39;bytearray&#39; type from python</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="flags" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span class="tsd-flag ts-flagStatic">Static</span> flags</h3>
-					<div class="tsd-signature tsd-kind-icon">flags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 3</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/479f0ce/src/Field.ts#L14">src/Field.ts:14</a></li>
+							<li>Defined in ../../../../../usr/local/lib/node_modules/typescript/lib/lib.es5.d.ts:973</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The yodel.flags type from yodel</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="int" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span class="tsd-flag ts-flagStatic">Static</span> int</h3>
-					<div class="tsd-signature tsd-kind-icon">int<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="stack" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
+					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/479f0ce/src/Field.ts#L8">src/Field.ts:8</a></li>
+							<li>Defined in ../../../../../usr/local/lib/node_modules/typescript/lib/lib.es5.d.ts:975</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The &#39;int&#39; type from python</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="str" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span class="tsd-flag ts-flagStatic">Static</span> str</h3>
-					<div class="tsd-signature tsd-kind-icon">str<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/aldenq/YodelAPI/blob/479f0ce/src/Field.ts#L10">src/Field.ts:10</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The &#39;str&#39; type from python</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -192,10 +176,10 @@
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/errors.html">Errors</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/field.html">Field</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -217,33 +201,39 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="field.field-1.html" class="tsd-kind-icon">Field</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="field.fieldtype.html" class="tsd-kind-icon">Field<wbr>Type</a>
+						<a href="errors.apiconnectionerror.html" class="tsd-kind-icon">APIConnection<wbr>Error</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="field.fieldtype.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="errors.apiconnectionerror.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="field.fieldtype.html#bytearray" class="tsd-kind-icon">bytearray</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="errors.apiconnectionerror.html#message" class="tsd-kind-icon">message</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="field.fieldtype.html#flags" class="tsd-kind-icon">flags</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="errors.apiconnectionerror.html#name" class="tsd-kind-icon">name</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="field.fieldtype.html#int" class="tsd-kind-icon">int</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="field.fieldtype.html#str" class="tsd-kind-icon">str</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="errors.apiconnectionerror.html#stack" class="tsd-kind-icon">stack</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="errors.invalidfieldargs.html" class="tsd-kind-icon">Invalid<wbr>Field<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="errors.reservedvalue.html" class="tsd-kind-icon">Reserved<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="errors.unkowngroup.html" class="tsd-kind-icon">Unkown<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="errors.yodelerror.html" class="tsd-kind-icon">Yodel<wbr>Error</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -263,9 +253,6 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 			</ul>
 		</div>
 	</div>
