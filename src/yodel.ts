@@ -144,7 +144,7 @@ export class YodelSocket{
     /**
      * The channel of this socket (per yodel protocol)
      */
-    channel: number;
+    _channel: number;
     /**
      * The yodel groups that this socket is a part of
      */
@@ -175,7 +175,7 @@ export class YodelSocket{
     constructor(hostip:string){
 
         this.hostip = hostip;
-        this.channel = 0;
+        this._channel = 0;
         
         this.directSock = new WebSocket(this.hostip);
         var thisref:YodelSocket = this;
@@ -244,7 +244,6 @@ export class YodelSocket{
                     "payload":payload,
                     "name":outName,
                     "group": outGroup,
-                    "channel": this.channel
                 }
             )
         );
@@ -329,6 +328,19 @@ export class YodelSocket{
         }
     }
 
+    /**
+     * The current channel that this yodel socket is running on.
+     */
+    get channel(){return this._channel;}
+    /**
+     * Change the channel that this yodel socket is listening/sending on.
+     */
+    set channel(val:number){
+        if(val!=this._channel){
+            this.sendRawMessage(new YodelMessage("setChannel", {channel:val}));
+            this._channel=val;
+        }
+    }
 
 
     private sendRawMessage(msg:YodelMessage){

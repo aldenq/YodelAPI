@@ -142,6 +142,9 @@ def passYodelleaveGroup(data) -> NoReturn:
 def passYodelToggleRelay(data) -> NoReturn:
     yodel.toggleRelay(bool(data["relay"]))
 
+def passYodelSetChannel(data) -> NoReturn:
+    yodel.setChannel(int(data["channel"]))
+
 # yodelResponses contains all the callbacks for the API calls.
 # So, when the JS sends over a request with {'action':'setName'}, the passYodelSetName function will be called
 # as is seen below.
@@ -153,7 +156,8 @@ yodelResponses: Dict[str, Callable[[Dict[Any, Any]], Any]] = {
     "setName"  : passYodelSetName,
     "createFormat" : passYodelNewFormat,
     "leaveGroup" : passYodelleaveGroup,
-    "toggleRelay" : passYodelToggleRelay
+    "toggleRelay" : passYodelToggleRelay,
+    "setChannel" : passYodelSetChannel
 }
 
 
@@ -219,8 +223,8 @@ async def checkIncomingJSON(sock:websockets.server.WebSocketServerProtocol) -> N
     action = jsonRequest["action"]
     kwargs = jsonRequest["kwargs"]
     print(jsonRequest)
-    if ('channel' in kwargs):
-        yodel.setChannel(int(kwargs["channel"]))
+    #if ('channel' in kwargs):
+    #    yodel.setChannel(int(kwargs["channel"]))
 
     insulatePassYodelCall(yodelResponses[action],kwargs)
 
