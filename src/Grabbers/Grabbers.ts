@@ -223,3 +223,4 @@ export abstract class Grabber{
 
 
 export { KeyboardGrabber } from "./KeyboardGrabber"
+export { AudioGrabber } from "./AudioGrabber"

@@ -364,4 +364,4 @@ export { InvalidFieldArgs, UnkownGroup, YodelError, APIConnectionError } from ".
 export { FieldType, Field } from "./Field"
 export { Section } from "./Section"
 export { Format } from "./Format"
-export { Grabber, KeyboardGrabber } from "./Grabbers/Grabbers"
+export { Grabber, KeyboardGrabber, AudioGrabber } from "./Grabbers/Grabbers"
