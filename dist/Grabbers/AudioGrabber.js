@@ -27,20 +27,35 @@ var AudioGrabber = /** @class */ (function (_super) {
     __extends(AudioGrabber, _super);
     function AudioGrabber() {
         var _this = _super.call(this) || this;
-        _this.mediaRecorder = undefined;
         _this.tasklist = [];
         var thisref = _this;
+        _this.mediaRecorder = new MediaRecorder(new MediaStream());
         navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
             thisref.mediaRecorder = new MediaRecorder(stream);
             thisref.mediaRecorder.addEventListener("start", function () {
-                thisref.tasklist.forEach(function (listeners) {
-                    if (thisref.mediaRecorder == undefined)
-                        throw new Error("media recorder is undefined.");
-                    thisref.mediaRecorder.addEventListener("dataavailable", listeners.audio);
-                });
-                thisref.tasklist = [];
+                if (thisref.tasklist.length > 0) {
+                    thisref.tasklist.forEach(function (listeners) {
+                        if (thisref.mediaRecorder == undefined)
+                            throw new Error("media recorder is undefined.");
+                        thisref.mediaRecorder.addEventListener("dataavailable", listeners.audio);
+                    });
+                    thisref.tasklist = [];
+                }
+                setTimeout(function () {
+                    if (thisref.mediaRecorder == undefined) {
+                        return;
+                    }
+                    console.log("Stopped");
+                    thisref.mediaRecorder.stop();
+                }, 100);
             });
-            thisref.mediaRecorder.start(5);
+            // thisref.mediaRecorder.addEventListener("stop", ()=>{
+            //     if(thisref.mediaRecorder == undefined){return;}
+            //     console.log("Started");
+            //     thisref.mediaRecorder.start();
+            // });
+            thisref.mediaRecorder.start();
+            console.log("Started");
         });
         return _this;
     }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AudioGrabber = exports.KeyboardGrabber = exports.Grabber = exports.API_GRABBER_HEADER_KEY = void 0;
+exports.KeyboardGrabber = exports.Grabber = exports.API_GRABBER_HEADER_KEY = void 0;
 /**@internal*/
 exports.API_GRABBER_HEADER_KEY = "__grabber";
 /**
@@ -128,5 +128,3 @@ var Grabber = /** @class */ (function () {
 exports.Grabber = Grabber;
 var KeyboardGrabber_1 = require("./KeyboardGrabber");
 Object.defineProperty(exports, "KeyboardGrabber", { enumerable: true, get: function () { return KeyboardGrabber_1.KeyboardGrabber; } });
-var AudioGrabber_1 = require("./AudioGrabber");
-Object.defineProperty(exports, "AudioGrabber", { enumerable: true, get: function () { return AudioGrabber_1.AudioGrabber; } });

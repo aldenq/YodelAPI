@@ -1,6 +1,6 @@
 
 // Create a new yodel socket connected to the local API server
-let yodelSocket = new yodel.YodelSocket("ws://localhost:5560", "YodelTest");
+let yodelSocket = new yodel.YodelSocket("ws://192.168.1.78:5561/", "YodelTest");
 
 
 // Collect some HTML elements:
@@ -52,9 +52,4 @@ submit.onclick = localMessageAdder;
 yodelSocket.setOnConnect(setup);
 yodelSocket.setOnMessage(receiver);
 
-let collector = (event, type)=>{
-    console.log(type, event);
-}
 
-let testgrab = new yodel.KeyboardGrabber();
-testgrab.linkTo(collector);
