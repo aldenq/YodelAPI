@@ -1,4 +1,4 @@
-<html>
+<html >
     <head>
         <title>Yodel Chat</title>
 
@@ -13,19 +13,35 @@
         <!-- Yodel include -->
         <script src="../../../dist/yodel.js"></script>
     </head>
-    <body class="">
-        <div uk-grid >
-                    <input class="uk-input" type="text" id="NameBox" placeholder="Name"></input>
-                    <input class="uk-input uk-margin-small" type="text" id ="MessageBox" placeholder="Message"></input>
-                    <button class = "uk-width-1-1 uk-height-1-1 uk-button uk-button-primary" id = "submit" type="button">Submit</button>
-        </div> 
-        <div uk-grid>
-            <div class="uk-height-1-1 uk-panel uk-overflow-auto uk-width-1-1">
-                <ul class="uk-list uk-list-striped uk-padding" id="MessageList">
+    <body class="uk-background-secondary" style="overflow: none;">
+        
+        <div class="uk-navbar  uk-background-primary">
+            <div class="uk-container uk-padding-small uk-light">
+                <h1>Yodel Chat</h1>
+            </div>
+        </div>
+        
+        <div uk-grid id="msgcc">
+            <div class="uk-panel uk-panel-scrollable uk-overflow-auto uk-width-1-1" style="resize:none;border-right-width: 0;bottom:0;"  uk-height-viewport="expand: true" id ="msgc">
+                <ul class="uk-list uk-list-divider uk-padding uk-table-condensed uk-light" id="MessageList">
                     
                 </ul>
             </div>
         </div>
+        
+        <div class="uk-padding" style="position: fixed;bottom:0;" uk-grid>
+            <form class="uk-form " style="position: relative;">
+                <input class="uk-input" type="text" id="NameBox" placeholder="Name"></input>
+                <input class="uk-input uk-margin-small " type="text" id ="MessageBox" placeholder="Message"></input>
+                <button class = "uk-button uk-button-primary" id = "submit" type="button">Submit</button>
+            </form>
+        </div> 
+        <div class="uk-background-secondary" style="bottom:0;height:30%">
+
+        </div>
     </body>
+    <script>
+        document.getElementById("msgc").style.height = window.innerHeight/1.75+"px";
+    </script>
     <script src="main.js"></script>
 </html>
