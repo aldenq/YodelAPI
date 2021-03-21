@@ -1,6 +1,6 @@
 
 // Create a new yodel socket connected to the local API server
-let yodelSocket = new yodel.YodelSocket("ws://192.168.1.78:5561/", "YodelTest");
+let yodelSocket = new yodel.YodelSocket("ws://192.168.1.78:5561/");
 
 
 // Collect some HTML elements:
@@ -12,7 +12,7 @@ let nameBox = document.getElementById("NameBox");
 
 // Sloppy and quick way to add a message to the list
 function addMessage(name, message){
-    messageList.innerHTML += "<li class='uk-padding-small uk-width-1-1'><p class='uk-text'><b>"+
+    messageList.innerHTML += "<li class='uk-padding-small uk-width-1-1 uk-background-primary' style='border-radius:25px;'><p class='uk-text'><b>"+
     name+"</b>:\t"+
     message+
     "</p></li>";
@@ -40,7 +40,7 @@ function localMessageAdder(){
         yodelSocket.send({
             name: nameBox.value,
             message: textBox.value
-        }, "YodelEcho", "b");
+        }, "", "a");
         
         // Reset the textbox
         textBox.value = ""
