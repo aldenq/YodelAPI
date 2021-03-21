@@ -265,7 +265,7 @@ def beginServing():
     # This combination will allow the websocket server to run on the asyncio
     # event loop, and feed new connections through to the yodelSuite coroutine
     asyncio.get_event_loop().run_until_complete(
-        websockets.serve(yodelSuite, "192.168.1.78", globals.port)
+        websockets.serve(yodelSuite, globals.host, globals.port)
     )
     # Setup yodel with the radio device
     yodel.startRadio(globals.yodelStartRadio)
