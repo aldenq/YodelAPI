@@ -1,2 +1,3 @@
 Server/yodel/**
 node_modules/**
+*.pyc

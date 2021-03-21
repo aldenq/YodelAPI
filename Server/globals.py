@@ -7,3 +7,5 @@ yodelStartRadio: str = ""
 port:int = 5560
 # Global Queue for cross-thread communication
 outgoingMessages:Queue = Queue(1024)
+# IP used for websocket
+host:str = "localhost"
