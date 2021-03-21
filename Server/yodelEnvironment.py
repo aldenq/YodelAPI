@@ -1,4 +1,4 @@
-from yodel.errors import YodelError
+#from yodel.errors import YodelError
 from asyncio.exceptions import CancelledError
 from json.decoder import JSONDecodeError
 from types import FunctionType, LambdaType
