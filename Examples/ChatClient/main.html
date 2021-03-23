@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Yodel Chat</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.17/dist/js/uikit-icons.min.js"></script>
+        <!-- Yodel include -->
+        <script src="../../../dist/yodel.js"></script>
+        <script>
+            //get's a query parameter by name from current url
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            };
+
+
+            window.hostIP = getUrlParameter("ip");
+
+        </script>
+    </head>
+    <body class="uk-background-secondary" style="overflow: none;">
+        
+        <div class="uk-navbar  uk-background-primary">
+            <div class="uk-container uk-padding-small uk-light">
+                <h1>Yodel Chat</h1>
+            </div>
+        </div>
+        
+        <div uk-grid id="msgcc">
+            <div class="uk-panel uk-panel-scrollable uk-overflow-auto uk-width-1-1" style="resize:none;border-right-width: 0;bottom:0;"  uk-height-viewport="expand: true" id ="msgc">
+                <ul class="uk-list uk-list-divider uk-padding uk-table-condensed uk-light" id="MessageList">
+                    
+                </ul>
+            </div>
+        </div>
+        
+        <div class="uk-padding" style="position: fixed;bottom:0;" uk-grid>
+            <form class="uk-form " style="position: relative;">
+                <input class="uk-input" type="text" id="NameBox" placeholder="Name"></input>
+                <input class="uk-input uk-margin-small " type="text" id ="MessageBox" placeholder="Message"></input>
+                <button class = "uk-button uk-button-primary" id = "submit" type="button">Submit</button>
+            </form>
+        </div> 
+        <div class="uk-background-secondary" style="bottom:0;height:30%">
+
+        </div>
+    </body>
+    <script>
+        document.getElementById("msgc").style.height = window.innerHeight/1.75+"px";
+    </script>
+    <script src="main.js"></script>
+</html>

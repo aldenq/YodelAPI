@@ -1,6 +1,6 @@
 
 // Create a new yodel socket connected to the local API server
-let yodelSocket = new yodel.YodelSocket("ws://192.168.1.78:5561/");
+let yodelSocket = new yodel.YodelSocket(window.hostIP);
 
 
 // Collect some HTML elements:
