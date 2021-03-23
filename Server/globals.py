@@ -9,3 +9,5 @@ port:int = 5560
 outgoingMessages:Queue = Queue(1024)
 # IP used for websocket
 host:str = "localhost"
+# internal
+gui:bool = False

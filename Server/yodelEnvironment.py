@@ -13,6 +13,11 @@ import websockets
 import asyncio
 import json
 from threading import Thread
+import sys
+globalstdout = sys.stdout
+def forceGuiPrint(*args):
+    globalstdout.write(' '.join((str(arg) for arg in args)))
+    globalstdout.flush()
 
 '''
 Existing yodel formats are cached Format obects created by the API
@@ -34,7 +39,7 @@ def insulatePassYodelCall(fn, data):
         fn(data)
     except YodelError as e:
         # Any yodel related errors are sent back up to the JS client to be thrown as JS errors
-        print(str(e))
+        forceGuiPrint(str(e))
         globals.outgoingMessages.put({"name":e.__name__,"message":str(e)})
 
 '''
@@ -43,7 +48,8 @@ request, and use them to make an yodel call with info from the call.
 '''
 def passYodelSendBasic(data): 
     '''The basic send function's kwargs are directly mapped'''
-    print("RAW:", data["payload"])
+    if(globals.gui):
+        forceGuiPrint(f"o{json.dumps(data)}")
     yodel.send(data["payload"], name=data["name"], group=data["group"])
 
 def passYodelSendSection(data):
@@ -62,6 +68,8 @@ def passYodelSendSection(data):
         name: "..."
     }
     '''
+    if(globals.gui):
+        forceGuiPrint(f"o{json.dumps(data)}")
     sectionData = data["payload"]
     section = yodel.Section(passYodelNewFormat(sectionData["format"]))
     for key in sectionData["fields"]:
@@ -190,14 +198,15 @@ def yodelLoop() -> NoReturn:
                         "kwargs":raw
                     }
                 )
-                print(message)
+                if(globals.gui):
+                    forceGuiPrint(f"i{json.dumps(raw)}")
                 # The message (which is now just a string) can now be added to the global Queue 
                 # where it will be picked up from the WebSocket thread, and sent to the JS.
                 globals.outgoingMessages.put(message)
         
         except YodelError as e:
             # Any yodel related errors are sent back up to the JS client to be thrown as JS errors
-            print(str(e))
+            forceGuiPrint(str(e))
             globals.outgoingMessages.put({"name":e.__name__,"message":str(e)})
 
 async def checkIncomingJSON(sock:websockets.server.WebSocketServerProtocol) -> NoReturn:
@@ -219,10 +228,10 @@ async def checkIncomingJSON(sock:websockets.server.WebSocketServerProtocol) -> N
     try:
         jsonRequest = json.loads(jsonRequest)
     except json.JSONDecodeError as e:
-        print(str(e))
+        forceGuiPrint(str(e))
     action = jsonRequest["action"]
     kwargs = jsonRequest["kwargs"]
-    print(jsonRequest)
+    #forceGuiPrint(jsonRequest)
     #if ('channel' in kwargs):
     #    yodel.setChannel(int(kwargs["channel"]))
 
@@ -260,7 +269,8 @@ def beginServing():
     '''
     Basic setup for the WebSocket server, yodel, and a thread
     '''
-    print("Binding to port: ", globals.port)
+    forceGuiPrint("Binding to port: ", globals.port)
+
 
     # This combination will allow the websocket server to run on the asyncio
     # event loop, and feed new connections through to the yodelSuite coroutine
