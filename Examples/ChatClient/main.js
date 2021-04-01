@@ -8,7 +8,7 @@ let messageList = document.getElementById("MessageList");
 let textBox = document.getElementById("MessageBox");
 let submit = document.getElementById("submit");
 let nameBox = document.getElementById("NameBox");
-
+let pinger = document.getElementById("pinger");
 
 // Sloppy and quick way to add a message to the list
 function addMessage(name, message){
@@ -23,18 +23,30 @@ function setup(){
     yodelSocket.channel = 8;
     yodelSocket.name = "YodelTest";
     yodelSocket.joinGroup("a");
+    setInterval(()=>{if(yodelSocket){yodelSocket.send("PING")}}, 150);
+
 }
+
+function rping(){
+    pinger.style = "color: green;";
+    setTimeout(()=>{pinger.style = "color: red;"}, 200);
+}
+
 
 // Receive a message from the yodel socket
 function receiver(section){
-    addMessage(section.fields.name, section.fields.message);
+    if(section.name != undefined){
+        addMessage(section.fields.name, section.fields.message);
+    }else{
+        rping();
+    }
 }
 
 // Add a local message to the board, and send it out through yodel
 function localMessageAdder(){
     if (textBox.value != ""){
         // Add the message locally using 'Me' as the username of the poster
-        addMessage("Me",textBox.value);
+        //addMessage("Me",textBox.value);
         
         // Send the message and my name through the yodel socket
         yodelSocket.send({
@@ -46,6 +58,8 @@ function localMessageAdder(){
         textBox.value = ""
     }
 }
+
+
 
 // Apply events
 submit.onclick = localMessageAdder;
