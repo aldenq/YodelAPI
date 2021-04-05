@@ -1,6 +1,25 @@
 
+
+let hostIP = new String(window.hostIP);
+if (hostIP.startsWith("ws")){
+    // already formatted
+}else if (hostIP.indexOf(".") == -1 && !hostIP.startsWith("localhost")){
+    // Just the port:
+    let full = new URL(location.href);
+    let domain = full.hostname;
+    console.log(domain);
+
+    hostIP = "ws:"+domain+":"+hostIP;
+
+}else{
+    // Just the domain and port
+    hostIP = "ws://"+hostIP;
+}
+
+console.log("Connecting to: ", hostIP);
+
 // Create a new yodel socket connected to the local API server
-let yodelSocket = new yodel.YodelSocket(window.hostIP);
+let yodelSocket = new yodel.YodelSocket(hostIP);
 
 
 // Collect some HTML elements:
@@ -9,6 +28,10 @@ let textBox = document.getElementById("MessageBox");
 let submit = document.getElementById("submit");
 let nameBox = document.getElementById("NameBox");
 let pinger = document.getElementById("pinger");
+
+
+let lastMessageId = "p"+Math.random();
+
 
 // Sloppy and quick way to add a message to the list
 function addMessage(name, message){
@@ -23,7 +46,14 @@ function setup(){
     yodelSocket.channel = 8;
     yodelSocket.name = "YodelTest";
     yodelSocket.joinGroup("a");
-    setInterval(()=>{if(yodelSocket){yodelSocket.send("PING")}}, 150);
+    setInterval(()=>{
+        if(yodelSocket){
+            
+            lastMessageId = "p"+Math.random();
+            yodelSocket.send(lastMessageId);
+            
+        }
+    }, 1000);
 
 }
 
@@ -37,7 +67,7 @@ function rping(){
 function receiver(section){
     if(section.name != undefined){
         addMessage(section.fields.name, section.fields.message);
-    }else{
+    }else {
         rping();
     }
 }
